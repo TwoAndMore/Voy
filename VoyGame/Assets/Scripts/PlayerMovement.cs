@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private const float STANDARTSPEED = 10f;
-    private const float RUNSPEED = 150f;
+    private const float STANDARTSPEED = 7f;
+    private const float RUNSPEED = 10f;
     private const float CROUCHSPEED = 5f;
 
     [SerializeField] private Transform _groundCheck;
@@ -19,10 +19,7 @@ public class PlayerMovement : MonoBehaviour
     private bool _isGrounded;
     private bool _isCrouch;
 
-    private void Awake()
-    {
-        _controller = GetComponent<CharacterController>();
-    }
+    private void Awake() => _controller = GetComponent<CharacterController>();
 
     private void Update()
     {
@@ -47,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
             _isCrouch = true;
             _speed = CROUCHSPEED;
         }
-        else
+        else if(Input.GetKeyUp(KeyCode.LeftControl))
         {
             _isCrouch = false;
             _speed = STANDARTSPEED;
