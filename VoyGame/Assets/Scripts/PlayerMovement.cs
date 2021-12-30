@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private Transform _groundCheck;
     [SerializeField] private LayerMask _groundMask;
+    [SerializeField] private Animator _animator;
 
     private CharacterController _controller;
     private Vector3 _velocity;
@@ -27,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
         float z = Input.GetAxis("Vertical");
         
         Vector3 move = transform.right * x + transform.forward * z;
-
+        Debug.Log(move);
         _controller.Move(move * _speed * Time.deltaTime);
         _velocity.y += _gravity * Time.deltaTime;
         _controller.Move(_velocity * Time.deltaTime);
@@ -51,15 +52,23 @@ public class PlayerMovement : MonoBehaviour
         }
         
         Jump();
+        
+        //Animations
+        _animator.SetBool("isWalking", move.x+move.z != 0f);
+        _animator.SetBool("isRunning", _speed == RUNSPEED);
+        _animator.SetBool("isCrouching", _isCrouch);
+        _animator.SetBool("isCrouchWalking", _isCrouch && move.x+move.z != 0f);
+        _animator.SetBool("isJumping", !_isGrounded);
     }
 
     private void Jump()
     {
         _isGrounded = Physics.CheckSphere(_groundCheck.position, _groundDistance, _groundMask);
         
-        if(Input.GetButtonDown("Jump") && _isGrounded)
+        if(Input.GetButtonDown("Jump") && _isGrounded && !_isCrouch)
         {
-            _velocity.y = Mathf.Sqrt(_jumpHeight * -2f * _gravity); 
+            _velocity.y = Mathf.Sqrt(_jumpHeight * -2f * _gravity);
+            _animator.SetTrigger("Jump");
         }
         
         if(_isGrounded &&  _velocity.y < 0)
