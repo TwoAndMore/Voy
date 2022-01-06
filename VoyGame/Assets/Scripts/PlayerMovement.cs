@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -28,7 +27,6 @@ public class PlayerMovement : MonoBehaviour
         float z = Input.GetAxis("Vertical");
         
         Vector3 move = transform.right * x + transform.forward * z;
-        Debug.Log(move);
         _controller.Move(move * _speed * Time.deltaTime);
         _velocity.y += _gravity * Time.deltaTime;
         _controller.Move(_velocity * Time.deltaTime);
@@ -55,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
         
         //Animations
         _animator.SetBool("isWalking", move.x+move.z != 0f);
-        _animator.SetBool("isRunning", _speed == RUNSPEED);
+        _animator.SetBool("isRunning", _speed == RUNSPEED && move.x+move.z != 0f);
         _animator.SetBool("isCrouching", _isCrouch);
         _animator.SetBool("isCrouchWalking", _isCrouch && move.x+move.z != 0f);
         _animator.SetBool("isJumping", !_isGrounded);
@@ -71,9 +69,7 @@ public class PlayerMovement : MonoBehaviour
             _animator.SetTrigger("Jump");
         }
         
-        if(_isGrounded &&  _velocity.y < 0)
-        {
+        if(_isGrounded &&  _velocity.y < 0) 
             _velocity.y = -2f;
-        }
     }
 }
