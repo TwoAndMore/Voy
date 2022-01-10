@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask _groundMask;
     [SerializeField] private Animator _animator;
 
+    private Stamina _staminaScript;
     private CharacterController _controller;
     private Vector3 _velocity;
     private float _speed = STANDARTSPEED;
@@ -18,9 +19,15 @@ public class PlayerMovement : MonoBehaviour
     private float _groundDistance = 0.4f;
     private bool _isGrounded;
     private bool _isCrouch;
-
-    private void Awake() => _controller = GetComponent<CharacterController>();
-
+    
+    public bool isRunning;
+    
+    private void Awake()
+    {
+        _staminaScript = GetComponent<Stamina>();
+        _controller = GetComponent<CharacterController>();
+    }
+    
     private void Update()
     {
         float x = Input.GetAxis("Horizontal");
@@ -32,10 +39,16 @@ public class PlayerMovement : MonoBehaviour
         _controller.Move(_velocity * Time.deltaTime);
 
         //Running
-        if (Input.GetKey(KeyCode.LeftShift) && !_isCrouch && _isGrounded)
+        if (Input.GetKey(KeyCode.LeftShift) && !_isCrouch && _isGrounded && _staminaScript.HaveStamina() && !_staminaScript.isLow)
+        {
+            isRunning = true;
             _speed = RUNSPEED;
+        }
         else
+        {
             _speed = STANDARTSPEED;
+            isRunning = false;
+        }
 
         //Crouching
         if (Input.GetKey(KeyCode.LeftControl) && _isGrounded)
@@ -50,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
         }
         
         Jump();
-        
+
         //Animations
         _animator.SetBool("isWalking", move.x+move.z != 0f);
         _animator.SetBool("isRunning", _speed == RUNSPEED && move.x+move.z != 0f);
