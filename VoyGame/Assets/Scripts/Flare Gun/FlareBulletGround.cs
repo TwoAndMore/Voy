@@ -2,7 +2,7 @@
 
 public class FlareBulletGround : MonoBehaviour 
 {
-	[SerializeField] private AudioClip pickupSound;
+	[SerializeField] private AudioClip _pickupSound;
 
 	private void OnTriggerEnter(Collider other)
 	{
@@ -10,9 +10,9 @@ public class FlareBulletGround : MonoBehaviour
 		{
 			if (other.GetComponent<FlareGun>().currentAmmo < other.GetComponent<FlareGun>().inventorySize)
 			{
-				GetComponent<AudioSource>().PlayOneShot(pickupSound);			
+				GetComponent<AudioSource>().PlayOneShot(_pickupSound);			
 				other.GetComponent<FlareGun>().currentAmmo++;
-				Destroy(gameObject, pickupSound.length);	
+				Destroy(gameObject, _pickupSound.length);	
 			}
 			else
 			{
