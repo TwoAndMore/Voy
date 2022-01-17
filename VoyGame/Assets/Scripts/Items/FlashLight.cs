@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class FlashLight : MonoBehaviour
 {
-    [SerializeField] private GameObject lightSource;
+    [SerializeField] private GameObject _lightSource;
 
     private AudioSource _clickSound;
     private bool _isOn;
@@ -13,7 +13,7 @@ public class FlashLight : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             _isOn = !_isOn;
-            lightSource.SetActive(_isOn);
+            _lightSource.SetActive(_isOn);
             _clickSound.Play();
         }
     }
