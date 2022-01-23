@@ -6,6 +6,12 @@ TagManager:
   tags:
   - Enemy
   - FlareGun
+  - Adrenaline
+  - FlareAmmo
+  - HandLamp
+  - Compass
+  - Mirror
+  - AnotherDimension
   layers:
   - Default
   - TransparentFX

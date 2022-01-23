@@ -4,12 +4,13 @@ using UnityEngine;
 public class ItemInventory : MonoBehaviour
 {
     private const KeyCode TAKEPILLS = KeyCode.G;
-    
+
     [SerializeField] private Transform _itemsPosition;
-    
-    #region PillsVariables
-    [SerializeField] private AdrenalineText _adrenalineText;
-    
+
+    public bool haveMainItem;
+
+    [Header("Pills")] [SerializeField] private AdrenalineText _adrenalineText;
+
     private Stamina _staminaScript;
     private float _durability = 20f;
     private float _increaseModAdder = 10f;
@@ -17,24 +18,26 @@ public class ItemInventory : MonoBehaviour
 
     public int maxPillsAmount = 3;
     public int pillsAmount;
-    #endregion
-    
-    #region FlageGunVariables
-    //Ammo
+
+    [Header("FlareGun")] 
     [SerializeField] private FlareGunAmmoText _flareGunAmmoText;
-    
+
     public int maxAmmoAmount;
     public int currentAmmoAmount;
-    
-    //Gun
+
     [SerializeField] private GameObject _gunPrefab;
     [SerializeField] private FlareGunAmmoText _flareGunAmmoTextScript;
-    #endregion
 
-    #region LampVariables
+    [Header("Lamp")] 
     [SerializeField] private GameObject _lampPrefab;
-    #endregion
-    
+
+    [Header("Compass")] 
+    [SerializeField] private GameObject _compassPrefab;
+    [SerializeField] private GameObject _compassUI;
+
+    [Header("Mirror")] 
+    [SerializeField] private GameObject _mirrorPrefab;
+
     private void Awake() => _staminaScript = GetComponent<Stamina>();
 
     private void Update()
@@ -43,6 +46,7 @@ public class ItemInventory : MonoBehaviour
     }
 
     #region Pills
+
     private void TakePills()
     {
         if (Input.GetKeyDown(TAKEPILLS))
@@ -57,7 +61,7 @@ public class ItemInventory : MonoBehaviour
                 _adrenalineText.SetText();
                 StopCoroutine(PillsTaken());
                 StartCoroutine(PillsTaken());
-            } 
+            }
         }
     }
 
@@ -75,10 +79,10 @@ public class ItemInventory : MonoBehaviour
         _staminaScript.increaseMod -= _increaseModAdder;
         _staminaScript.timeRest += _decreaseRest;
     }
-    
+
 
     #endregion
-    
+
     #region FlareGun
 
     public void AddFlareGunAmmo()
@@ -89,6 +93,7 @@ public class ItemInventory : MonoBehaviour
 
     public void AddFlareGun()
     {
+        haveMainItem = true;
         GameObject gun = Instantiate(_gunPrefab, _itemsPosition);
         gun.GetComponent<FlareGunShoot>().itemInventoryScript = this;
         gun.GetComponent<FlareGunShoot>().flareGunAmmoTextScript = _flareGunAmmoTextScript;
@@ -101,9 +106,35 @@ public class ItemInventory : MonoBehaviour
 
     public void AddLamp()
     {
+        haveMainItem = true;
         GameObject lamp = Instantiate(_lampPrefab, _itemsPosition);
         lamp.transform.localPosition = new Vector3(0f, 0.03f, 0.15f);
-    } 
+    }
 
+    #endregion
+
+    #region Compass
+
+    public void AddCompass()
+    {
+        haveMainItem = true;
+        GameObject compass = Instantiate(_compassPrefab, _itemsPosition);
+        compass.transform.localPosition = new Vector3(0.15f, 0.085f, 0.14f);
+        compass.transform.localRotation = Quaternion.Euler(-3f, -30f, 30f);
+        _compassUI.SetActive(true);   
+    }
+
+    #endregion
+
+    #region Mirror
+
+    public void AddMirror()
+    {
+        haveMainItem = true;
+        GameObject mirror = Instantiate(_mirrorPrefab, _itemsPosition);
+        mirror.transform.localPosition = new Vector3(0f, 0.13f, 0f);
+        mirror.GetComponent<Mirror>().player = gameObject;
+    }
+    
     #endregion
 }
