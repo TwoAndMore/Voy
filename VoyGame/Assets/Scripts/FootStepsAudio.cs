@@ -1,16 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FootStepsAudio : MonoBehaviour
 {
+    [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip[] _clips;
-
-    private AudioSource _audioSource;
-    private void Awake()
-    {
-        _audioSource = GetComponent<AudioSource>();
-    }
     
     private void Step()
     {

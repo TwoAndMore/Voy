@@ -18,7 +18,7 @@ public class Mirror : MonoBehaviour
     private AudioSource _audioSource;
     private Color32 _activeColor = new Color32(255,0,0,200);
     private Color32 _reloadColor = new Color32(70, 70, 70, 225);
-    private Color32 _mainColor;
+    private Color32 _mainColor = new Color32(100, 100, 100, 200);
     private bool _isReloading;
     private float _reloadTime = 5f;
     private float _delayTIme = 4f;
@@ -28,7 +28,7 @@ public class Mirror : MonoBehaviour
     
     private void Awake()
     {
-        _mainColor = _glassMaterial.color;
+        _glassMaterial.color = _mainColor;
         _teleportPosition = GameObject.FindWithTag(DIMENSIONTAG).transform;
         _audioSource = GetComponent<AudioSource>();
     }
