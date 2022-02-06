@@ -134,7 +134,8 @@ Material:
     - _WaveYSpeed: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.727, g: 0.74442554, b: 1, a: 1}
+    - _Color: {r: 0.16576186, g: 0.17076808, b: 0.23584908, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _ReflectColor: {r: 0.888, g: 0.8986667, b: 1, a: 1}
-    - _SpecColor: {r: 0.111587, g: 0.114263624, b: 0.133, a: 1}
+    - _SpecColor: {r: 0, g: 0, b: 0, a: 1}
+  m_BuildTextureStacks: []

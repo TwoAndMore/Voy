@@ -12,6 +12,8 @@ TagManager:
   - Compass
   - Mirror
   - AnotherDimension
+  - Fire
+  - Slimster
   layers:
   - Default
   - TransparentFX
