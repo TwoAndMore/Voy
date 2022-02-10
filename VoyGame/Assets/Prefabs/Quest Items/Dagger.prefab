@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 7642505831078884462}
   - component: {fileID: 7642505831078884464}
   - component: {fileID: 7642505831078884465}
+  - component: {fileID: 1610722928039127266}
   m_Layer: 0
   m_Name: Dagger
-  m_TagString: Untagged
+  m_TagString: QuestItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -176,6 +177,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.2, y: 0.2, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1610722928039127266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7642505831078884466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e79527bd1b9dac4d99b840c27cb3743, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: 5cf502e1f975e824096cfbcf7f641d75, type: 3}
+  image: {fileID: 0}
 --- !u!1001 &7642505831917728797
 PrefabInstance:
   m_ObjectHideFlags: 0

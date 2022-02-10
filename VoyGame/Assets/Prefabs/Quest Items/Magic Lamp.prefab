@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 1681499868529296949}
   - component: {fileID: 1681499868529296948}
   - component: {fileID: 1681499868529296939}
+  - component: {fileID: 1334250826793679732}
   m_Layer: 0
   m_Name: Magic Lamp
-  m_TagString: Untagged
+  m_TagString: QuestItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -176,6 +177,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.55368495, y: 0.6272485, z: 1.1869297}
   m_Center: {x: 0, y: -0.23210895, z: -0.09346485}
+--- !u!114 &1334250826793679732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1681499868529296938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e79527bd1b9dac4d99b840c27cb3743, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: 5cf502e1f975e824096cfbcf7f641d75, type: 3}
+  image: {fileID: 0}
 --- !u!1001 &1681499868873438793
 PrefabInstance:
   m_ObjectHideFlags: 0

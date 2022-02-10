@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class QuestItemsInventory : MonoBehaviour
 {
@@ -29,7 +30,8 @@ public class QuestItemsInventory : MonoBehaviour
     public void AddItem(int ID)
     {
         questItemsArray[ID].isFinded = true;
-        _items[ID].SetActive(true);
+        
+        _items[ID].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
     }
 
     public bool HaveElementalItems()

@@ -13,6 +13,7 @@ public class Coffin : MonoBehaviour
     [SerializeField] private GameObject _boidCrews;
     [SerializeField] private GameObject _pressFIcon;
     [SerializeField] private GameObject _progressBar;
+    [SerializeField] private GameObject _circleSlimsters;
     
     private QuestItemsInventory _questItemsInventoryScript;
     private GameObject _player;
@@ -20,6 +21,7 @@ public class Coffin : MonoBehaviour
     private bool _inRange;
     private bool _isReading;
     private bool _bookIsOn;
+    private bool _finished;
     
     public float maxBibleProgressValue = 100f;
     public float currentBibleProgressValue;
@@ -29,7 +31,7 @@ public class Coffin : MonoBehaviour
     
     private void Update()
     {
-        if(!IsObjectsActive() || !_inRange || !_bookIsOn)
+        if(!IsObjectsActive() || !_inRange || !_bookIsOn || _finished)
             return;
 
         if (Input.GetKeyDown(ACTIVATE))
@@ -54,6 +56,9 @@ public class Coffin : MonoBehaviour
 
     private void StopRead()
     {
+        if(!_bookIsOn)
+            return;
+        
         _isReading = false;
         
         ReadActivation(false);
@@ -63,12 +68,16 @@ public class Coffin : MonoBehaviour
     {
         if (currentBibleProgressValue <= maxBibleProgressValue)
         {
+            _circleSlimsters.SetActive(true);
             _progressBar.SetActive(true);
             _boidCrews.SetActive(true);
             currentBibleProgressValue += Time.deltaTime / 2f;
         }
         else
         {
+            StopRead();
+            _circleSlimsters.SetActive(false);
+            _finished = true;
             _boidCrews.SetActive(false);
             _boidButterflies.SetActive(true);
         }
@@ -94,7 +103,10 @@ public class Coffin : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(_bookIsOn)
+        if(!other.CompareTag("Player"))
+            return;
+
+        if(_bookIsOn && !_finished)
             _pressFIcon.SetActive(true);
         
         _player = other.gameObject;
@@ -103,9 +115,13 @@ public class Coffin : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        if(!other.CompareTag("Player"))
+            return;
+        
         if(_bookIsOn)
             _pressFIcon.SetActive(false);
-        
+
+        StopRead();
         _player = null;
         _inRange = false;
     }

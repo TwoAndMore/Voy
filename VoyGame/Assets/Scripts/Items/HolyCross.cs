@@ -12,6 +12,6 @@ public class HolyCross : MonoBehaviour
     {
         if(!enemy.CompareTag("Slimster"))
             return;
-        enemy.transform.Find("Body").GetComponent<Animator>().SetBool("isReversed", status);
+        enemy.GetComponent<Slimster>().animator.SetBool("isReversed", status);
     }
 }

@@ -14,6 +14,7 @@ TagManager:
   - AnotherDimension
   - Fire
   - Slimster
+  - QuestItem
   layers:
   - Default
   - TransparentFX
