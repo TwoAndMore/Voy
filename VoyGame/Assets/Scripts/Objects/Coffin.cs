@@ -14,6 +14,8 @@ public class Coffin : MonoBehaviour
     [SerializeField] private GameObject _pressFIcon;
     [SerializeField] private GameObject _progressBar;
     [SerializeField] private GameObject _circleSlimsters;
+    [SerializeField] private GameObject _youLostGameObject;
+    [SerializeField] private GameObject[] _randomTeleportPositions;
     
     private QuestItemsInventory _questItemsInventoryScript;
     private GameObject _player;
@@ -89,6 +91,12 @@ public class Coffin : MonoBehaviour
         _bookSoundObject.SetActive(status);
         _bibleScreen.SetActive(status);
         _bibleScreen.SetActive(status);
+    }
+
+    private void GameLost()
+    {
+        StopRead();
+        _youLostGameObject.SetActive(true);
     }
     
     public bool IsObjectsActive()

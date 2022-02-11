@@ -13434,14 +13434,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1388011545}
     m_Modifications:
-    - target: {fileID: 2106520263, guid: e44ee457b1630c54db73e2765648761c, type: 3}
-      propertyPath: _radius
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 2106520263, guid: e44ee457b1630c54db73e2765648761c, type: 3}
-      propertyPath: _enemyAmount
-      value: 25
-      objectReference: {fileID: 0}
     - target: {fileID: 1735808589166365500, guid: e44ee457b1630c54db73e2765648761c, type: 3}
       propertyPath: m_Name
       value: Coffin
