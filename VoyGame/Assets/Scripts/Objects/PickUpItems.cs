@@ -1,11 +1,11 @@
 using UnityEngine;
+using Photon.Pun;
 
-public class PickUpItems : MonoBehaviour
+public class PickUpItems : MonoBehaviourPunCallbacks
 {
     private const KeyCode PICKUP = KeyCode.E;
 
     [SerializeField] private AudioClip _pickUpSound;
-    [SerializeField] private GameObject _pressEIcon;
 
     private ItemInventory _itemInventoryScript;
     private AudioSource _audioSource;
@@ -22,14 +22,18 @@ public class PickUpItems : MonoBehaviour
 
     private void Update()
     {
-        _pressEIcon.SetActive(_inRange && _item != null);
+        if(!photonView.IsMine && PhotonNetwork.IsConnected)
+            return;
         
         if (Input.GetKeyDown(PICKUP) && _inRange && _item != null) 
-            TakeItem();
+            photonView.RPC("TakeItem",  RpcTarget.AllViaServer);
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        if(other.CompareTag("Cross"))
+            return;
+        
         _inRange = true;
         _triggerEnters++;
         _item = other.gameObject;
@@ -45,7 +49,8 @@ public class PickUpItems : MonoBehaviour
             _inRange = false;
         }
     }
-
+    
+    [PunRPC]
     private void TakeItem()
     {
         if (!ItIsObject())
@@ -65,7 +70,7 @@ public class PickUpItems : MonoBehaviour
         }
         else if (_item.CompareTag(_itemTags[2]))
         {
-            if (_itemInventoryScript.currentAmmoAmount < _itemInventoryScript.maxAmmoAmount)
+            if (_itemInventoryScript.currentAmmoAmount < _itemInventoryScript.maxAmmoAmount && _itemInventoryScript.haveGun)
                 _itemInventoryScript.AddFlareGunAmmo();
             else return;
         }
@@ -73,7 +78,9 @@ public class PickUpItems : MonoBehaviour
         {
             if(_itemInventoryScript.haveMainItem)
                 return;
+
             _itemInventoryScript.AddLamp();
+            //photonView.RPC("AddLamp", RpcTarget.All);
         }
         else if (_item.CompareTag(_itemTags[4]))
         {

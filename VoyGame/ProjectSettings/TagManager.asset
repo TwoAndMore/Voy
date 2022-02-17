@@ -15,6 +15,7 @@ TagManager:
   - Fire
   - Slimster
   - QuestItem
+  - Cross
   layers:
   - Default
   - TransparentFX

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -30,7 +31,7 @@ public class SettingsMenu : MonoBehaviour
         _resolutionDropdown.value = currentResolutionIndex;
         _resolutionDropdown.RefreshShownValue();
     }
-
+    
     public void SetGlobarVolume(float volume) => 
         _audioMixer.SetFloat("Master", Mathf.Log10(volume) * 20);
     

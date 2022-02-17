@@ -1,29 +1,38 @@
 using UnityEngine;
+using Photon.Pun;
 
-public class HandLamp : MonoBehaviour
+public class HandLamp : MonoBehaviourPunCallbacks
 {
     [SerializeField] private GameObject _lightSource;
     [SerializeField] private AudioClip _clickSound;
-    
+
+    private Renderer _renderer;
+    private AudioSource _audioSource;
     private bool _isOn;
+    
+    private void Awake()
+    {
+        _renderer = GetComponent<Renderer>();
+        _audioSource = GetComponent<AudioSource>();
+    }
 
     private void Update()
     {
-        HandLampActivation();
-    }
+        /*if(!photonView.IsMine && PhotonNetwork.IsConnected)
+            return;*/
 
+        
+        if(Input.GetKeyDown(KeyCode.E))
+            photonView.RPC("HandLampActivation", RpcTarget.All);
+    }
+    
+    [PunRPC]
     private void HandLampActivation()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            _isOn = !_isOn;
-            _lightSource.SetActive(_isOn);
-            GetComponent<AudioSource>().PlayOneShot(_clickSound);
+        _isOn = !_isOn;
+        _lightSource.SetActive(_isOn);
+        _audioSource.PlayOneShot(_clickSound);
 
-            if (_isOn)
-                GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(255f, 255f, 0f));
-            else
-                GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.gray);
-        }
+        _renderer.material.SetColor("_EmissionColor", _isOn ? new Color(255f, 255f, 0f) : Color.gray);
     }
 }

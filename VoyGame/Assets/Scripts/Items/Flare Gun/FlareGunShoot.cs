@@ -1,6 +1,7 @@
 using UnityEngine;
+using Photon.Pun;
 
-public class FlareGunShoot : MonoBehaviour
+public class FlareGunShoot : MonoBehaviourPunCallbacks
 {
     private const int BULLETFORCE = 2000;
 
@@ -24,12 +25,16 @@ public class FlareGunShoot : MonoBehaviour
 
     private void Update () 
     {
-        if(Input.GetMouseButtonDown(0) && !_gunAnimation.isPlaying) 
-            Shoot();
+        if(!photonView.IsMine && PhotonNetwork.IsConnected)
+            return;
+        
+        if(Input.GetMouseButtonDown(1) && !_gunAnimation.isPlaying) 
+            photonView.RPC("Shoot", RpcTarget.All);
         if(Input.GetKeyDown(KeyCode.R) && !_gunAnimation.isPlaying) 
-            Reload();
+            photonView.RPC("Reload", RpcTarget.All);
     }
   
+    [PunRPC]
     private void Shoot()
     {
         if (_bulletsInWeaponLeft <= 0)
@@ -50,7 +55,8 @@ public class FlareGunShoot : MonoBehaviour
         GameObject _bulletParticles = Instantiate(_gunShootParticles, _firePoint.position, _firePoint.rotation);
         Destroy(_bulletParticles, 1.5f);
     }
-  
+    
+    [PunRPC]
     private void Reload()
     {
         if(_bulletsInWeaponLeft <= 0 && itemInventoryScript.currentAmmoAmount != 0){

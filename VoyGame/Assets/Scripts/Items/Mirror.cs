@@ -1,7 +1,8 @@
 using System.Collections;
 using UnityEngine;
+using Photon.Pun;
 
-public class Mirror : MonoBehaviour
+public class Mirror : MonoBehaviourPunCallbacks
 {
     private const KeyCode ACTIVATECODE = KeyCode.E;
     private const string DIMENSIONTAG = "AnotherDimension";
@@ -35,6 +36,9 @@ public class Mirror : MonoBehaviour
     
     private void Update()
     {
+        if(!photonView.IsMine && PhotonNetwork.IsConnected)
+            return;
+        
         if (Input.GetKeyDown(ACTIVATECODE) && !_isReloading)
             StartCoroutine(Delay());
     }

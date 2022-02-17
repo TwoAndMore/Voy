@@ -1,10 +1,13 @@
+using System;
 using System.Collections;
+using Photon.Pun;
 using UnityEngine;
 
-public class ItemInventory : MonoBehaviour
+public class ItemInventory : MonoBehaviourPunCallbacks
 {
     private const KeyCode TAKEPILLS = KeyCode.G;
-
+    private const string HANDITEMSPATH = "Prefabs/Hand Items/";
+    
     [SerializeField] private Transform _itemsPosition;
 
     public bool haveMainItem;
@@ -21,7 +24,9 @@ public class ItemInventory : MonoBehaviour
 
     [Header("FlareGun")] 
     [SerializeField] private FlareGunAmmoText _flareGunAmmoText;
+    [SerializeField] private GameObject _flareGunAmmoUI;
 
+    public bool haveGun;
     public int maxAmmoAmount;
     public int currentAmmoAmount;
 
@@ -38,10 +43,15 @@ public class ItemInventory : MonoBehaviour
     [Header("Mirror")] 
     [SerializeField] private GameObject _mirrorPrefab;
 
+    public int _code;
+
     private void Awake() => _staminaScript = GetComponent<Stamina>();
 
     private void Update()
     {
+        if(Input.GetKeyDown(KeyCode.P))
+            photonView.TransferOwnership(_code);
+        
         TakePills();
     }
 
@@ -94,6 +104,8 @@ public class ItemInventory : MonoBehaviour
     public void AddFlareGun()
     {
         haveMainItem = true;
+        haveGun = true;
+        _flareGunAmmoUI.SetActive(true);
         GameObject gun = Instantiate(_gunPrefab, _itemsPosition);
         gun.GetComponent<FlareGunShoot>().itemInventoryScript = this;
         gun.GetComponent<FlareGunShoot>().flareGunAmmoTextScript = _flareGunAmmoTextScript;
@@ -103,14 +115,19 @@ public class ItemInventory : MonoBehaviour
     #endregion
 
     #region HandLamp
-
+    
     public void AddLamp()
     {
+        Debug.Log("ADDDDDDDDDDDDDDDD LAMP");
         haveMainItem = true;
-        GameObject lamp = Instantiate(_lampPrefab, _itemsPosition);
-        lamp.transform.localPosition = new Vector3(0f, 0.03f, 0.15f);
-    }
 
+        //GameObject lamp = PhotonNetwork.Instantiate(HANDITEMSPATH + _lampPrefab.name, _itemsPosition.position, Quaternion.identity);
+        GameObject lamp = Instantiate(_lampPrefab, _itemsPosition);
+        //lamp.transform.parent = _itemsPosition;
+        lamp.transform.localPosition = new Vector3(0f, 0.03f, 0.15f);
+        //lamp.transform.localRotation = Quaternion.Euler(-90, 0, 30);
+    }
+    
     #endregion
 
     #region Compass

@@ -1,11 +1,13 @@
-﻿using UnityEngine;
+﻿using Photon.Pun;
+using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviourPunCallbacks
 {
     private const float STANDARTSPEED = 7f;
     private const float RUNSPEED = 10f;
     private const float CROUCHSPEED = 5f;
 
+    [SerializeField] private GameObject _crouchPicture;
     [SerializeField] private Transform _groundCheck;
     [SerializeField] private LayerMask _groundMask;
     [SerializeField] private Animator _animator;
@@ -30,6 +32,9 @@ public class PlayerMovement : MonoBehaviour
     
     private void Update()
     {
+        if(!photonView.IsMine && PhotonNetwork.IsConnected)
+            return;
+        
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
         
@@ -61,6 +66,8 @@ public class PlayerMovement : MonoBehaviour
             _isCrouch = false;
             _speed = STANDARTSPEED;
         }
+        
+        _crouchPicture.SetActive(_isCrouch);
         
         Jump();
 

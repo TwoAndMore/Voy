@@ -1,6 +1,7 @@
+using Photon.Pun;
 using UnityEngine;
 
-public class Paper : MonoBehaviour
+public class Paper : MonoBehaviourPunCallbacks
 {
     [SerializeField] private AudioClip _pickUpSound;
     [SerializeField] private AddLetterUI _addLetterUIScript;
@@ -14,7 +15,8 @@ public class Paper : MonoBehaviour
     private void OnMouseEnter() => _outlineScript.enabled = true;
 
     private void OnMouseExit() => _outlineScript.enabled = false;
-
+    
+    [PunRPC]
     private void OnMouseDown()
     {
         bool firstClick = false;
