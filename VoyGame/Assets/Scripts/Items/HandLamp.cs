@@ -18,9 +18,8 @@ public class HandLamp : MonoBehaviourPunCallbacks
 
     private void Update()
     {
-        /*if(!photonView.IsMine && PhotonNetwork.IsConnected)
-            return;*/
-
+        if(!photonView.IsMine && PhotonNetwork.IsConnected)
+            return;
         
         if(Input.GetKeyDown(KeyCode.E))
             photonView.RPC("HandLampActivation", RpcTarget.All);

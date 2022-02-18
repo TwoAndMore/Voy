@@ -80,7 +80,6 @@ public class PickUpItems : MonoBehaviourPunCallbacks
                 return;
 
             _itemInventoryScript.AddLamp();
-            //photonView.RPC("AddLamp", RpcTarget.All);
         }
         else if (_item.CompareTag(_itemTags[4]))
         {

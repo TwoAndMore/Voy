@@ -89,8 +89,7 @@ public class ItemInventory : MonoBehaviourPunCallbacks
         _staminaScript.increaseMod -= _increaseModAdder;
         _staminaScript.timeRest += _decreaseRest;
     }
-
-
+    
     #endregion
 
     #region FlareGun
@@ -118,14 +117,13 @@ public class ItemInventory : MonoBehaviourPunCallbacks
     
     public void AddLamp()
     {
-        Debug.Log("ADDDDDDDDDDDDDDDD LAMP");
         haveMainItem = true;
 
-        //GameObject lamp = PhotonNetwork.Instantiate(HANDITEMSPATH + _lampPrefab.name, _itemsPosition.position, Quaternion.identity);
-        GameObject lamp = Instantiate(_lampPrefab, _itemsPosition);
-        //lamp.transform.parent = _itemsPosition;
-        lamp.transform.localPosition = new Vector3(0f, 0.03f, 0.15f);
-        //lamp.transform.localRotation = Quaternion.Euler(-90, 0, 30);
+        if (photonView.IsMine)
+        {
+            GameObject lamp = PhotonNetwork.Instantiate(HANDITEMSPATH + _lampPrefab.name, _itemsPosition.position, Quaternion.identity);
+            photonView.RPC("SetObjectParent", RpcTarget.All, lamp.GetComponent<PhotonView>().ViewID);
+        }
     }
     
     #endregion
@@ -154,4 +152,30 @@ public class ItemInventory : MonoBehaviourPunCallbacks
     }
     
     #endregion
+    
+    [PunRPC]
+    private void SetObjectParent(int thingID)
+    {
+        GameObject mainItem = null, mainPlayer = null;
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        PhotonView[] thingsView = FindObjectsOfType<PhotonView>();
+        
+        foreach (PhotonView thing in thingsView)
+        {
+            if (thing.ViewID == thingID)
+                mainItem = thing.gameObject;
+        }
+        
+        if(mainItem == null)
+                return;
+        
+        foreach (GameObject player in players)
+        {
+            if (player.GetComponent<PhotonView>().OwnerActorNr == mainItem.GetComponent<PhotonView>().OwnerActorNr)
+                mainPlayer = player;
+        }
+
+        if(mainPlayer != null)
+            mainItem.transform.parent = mainPlayer.transform.Find("CameraHolder/SwayThings");
+    }
 }
