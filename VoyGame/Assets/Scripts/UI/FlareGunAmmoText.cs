@@ -7,7 +7,9 @@ public class FlareGunAmmoText : MonoBehaviour
 
     private TextMeshProUGUI _text;
 
-    private void Awake() => _text = GetComponent<TextMeshProUGUI>();
+    private void Awake() => 
+        _text = GetComponent<TextMeshProUGUI>();
 
-    public void SetText() => _text.text = _itemInventory.currentAmmoAmount.ToString();
+    public void SetText() =>
+        _text.text = _itemInventory.currentAmmoAmount.ToString() + " / " + _itemInventory.maxAmmoAmount;
 }

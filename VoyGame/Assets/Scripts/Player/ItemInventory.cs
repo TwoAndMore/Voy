@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using Photon.Pun;
 using UnityEngine;
@@ -10,6 +9,9 @@ public class ItemInventory : MonoBehaviourPunCallbacks
     
     [SerializeField] private Transform _itemsPosition;
 
+    [SerializeField] private GameObject _mainItem;
+    [SerializeField] private GameObject _mainPlayer;
+    
     public bool haveMainItem;
 
     [Header("Pills")] [SerializeField] private AdrenalineText _adrenalineText;
@@ -23,15 +25,14 @@ public class ItemInventory : MonoBehaviourPunCallbacks
     public int pillsAmount;
 
     [Header("FlareGun")] 
-    [SerializeField] private FlareGunAmmoText _flareGunAmmoText;
     [SerializeField] private GameObject _flareGunAmmoUI;
-
+    [SerializeField] private GameObject _gunPrefab;
+    
+    public FlareGunAmmoText flareGunAmmoTextScript;
     public bool haveGun;
     public int maxAmmoAmount;
     public int currentAmmoAmount;
 
-    [SerializeField] private GameObject _gunPrefab;
-    [SerializeField] private FlareGunAmmoText _flareGunAmmoTextScript;
 
     [Header("Lamp")] 
     [SerializeField] private GameObject _lampPrefab;
@@ -97,7 +98,11 @@ public class ItemInventory : MonoBehaviourPunCallbacks
     public void AddFlareGunAmmo()
     {
         currentAmmoAmount += 1;
-        _flareGunAmmoText.SetText();
+        
+        if(!photonView.IsMine && PhotonNetwork.IsConnected)
+            return;
+        
+        flareGunAmmoTextScript.SetText();
     }
 
     public void AddFlareGun()
@@ -105,12 +110,21 @@ public class ItemInventory : MonoBehaviourPunCallbacks
         haveMainItem = true;
         haveGun = true;
         _flareGunAmmoUI.SetActive(true);
-        GameObject gun = Instantiate(_gunPrefab, _itemsPosition);
-        gun.GetComponent<FlareGunShoot>().itemInventoryScript = this;
-        gun.GetComponent<FlareGunShoot>().flareGunAmmoTextScript = _flareGunAmmoTextScript;
-        gun.transform.localPosition = new Vector3(0f, 0f, 0f);
+        if (photonView.IsMine)
+        {
+            GameObject gun = PhotonNetwork.Instantiate(HANDITEMSPATH + _gunPrefab.name, _itemsPosition.position, Quaternion.identity);
+            photonView.RPC("SetObjectParent", RpcTarget.All, gun.GetComponent<PhotonView>().ViewID);
+            photonView.RPC("SetGunScripts", RpcTarget.All);
+        }
     }
 
+    [PunRPC]
+    private void SetGunScripts()
+    {
+        FlareGunShoot gunShootScript = _mainItem.GetComponent<FlareGunShoot>();
+        gunShootScript.itemInventoryScript = this;
+        gunShootScript.flareGunAmmoTextScript = flareGunAmmoTextScript;
+    }  
     #endregion
 
     #region HandLamp
@@ -133,10 +147,9 @@ public class ItemInventory : MonoBehaviourPunCallbacks
     public void AddCompass()
     {
         haveMainItem = true;
-        GameObject compass = Instantiate(_compassPrefab, _itemsPosition);
-        compass.transform.localPosition = new Vector3(0.15f, 0.085f, 0.14f);
-        compass.transform.localRotation = Quaternion.Euler(-3f, -30f, 30f);
-        _compassUI.SetActive(true);   
+
+        Instantiate(_compassPrefab, _itemsPosition);
+        _compassUI.SetActive(true);
     }
 
     #endregion
@@ -156,26 +169,27 @@ public class ItemInventory : MonoBehaviourPunCallbacks
     [PunRPC]
     private void SetObjectParent(int thingID)
     {
-        GameObject mainItem = null, mainPlayer = null;
+        _mainItem = _mainPlayer = null;
+        
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         PhotonView[] thingsView = FindObjectsOfType<PhotonView>();
         
         foreach (PhotonView thing in thingsView)
         {
             if (thing.ViewID == thingID)
-                mainItem = thing.gameObject;
+                _mainItem = thing.gameObject;
         }
         
-        if(mainItem == null)
+        if(_mainItem == null)
                 return;
         
         foreach (GameObject player in players)
         {
-            if (player.GetComponent<PhotonView>().OwnerActorNr == mainItem.GetComponent<PhotonView>().OwnerActorNr)
-                mainPlayer = player;
+            if (player.GetComponent<PhotonView>().OwnerActorNr == _mainItem.GetComponent<PhotonView>().OwnerActorNr)
+                _mainPlayer = player;
         }
 
-        if(mainPlayer != null)
-            mainItem.transform.parent = mainPlayer.transform.Find("CameraHolder/SwayThings");
+        if(_mainPlayer != null)
+            _mainItem.transform.parent = _mainPlayer.transform.Find("CameraHolder/SwayThings");
     }
 }

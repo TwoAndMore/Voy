@@ -70,6 +70,9 @@ public class PickUpItems : MonoBehaviourPunCallbacks
         }
         else if (_item.CompareTag(_itemTags[2]))
         {
+            /*if(!photonView.IsMine && PhotonNetwork.IsConnected)
+                return;*/
+            
             if (_itemInventoryScript.currentAmmoAmount < _itemInventoryScript.maxAmmoAmount && _itemInventoryScript.haveGun)
                 _itemInventoryScript.AddFlareGunAmmo();
             else return;

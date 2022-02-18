@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        //PhotonNetwork.OfflineMode = true;
         Instance = this;
         Spawn();
     }

@@ -1,8 +1,8 @@
-using System;
 using System.Collections;
+using Photon.Pun;
 using UnityEngine;
 
-public class Stamina : MonoBehaviour
+public class Stamina : MonoBehaviourPunCallbacks
 {
     [SerializeField] private StaminaBar _staminaBarScript;
     
@@ -10,19 +10,19 @@ public class Stamina : MonoBehaviour
     private float _decreaseMod = 25f;
     private float _currentStamina = 100f;
 
-    [HideInInspector] public bool isLow;
-
+    public bool isLow;
     public float maxStamina = 100f;
     public float increaseMod = 15f;
     public float timeRest = 3f;
 
-    private void Awake()
-    {
+    private void Awake() => 
         _playerMovementScript = GetComponent<PlayerMovement>();
-    }
 
     private void Update()
     {
+        if(!photonView.IsMine && PhotonNetwork.IsConnected)
+            return;
+        
         if (_playerMovementScript.isRunning)
             _currentStamina -= Time.deltaTime * _decreaseMod;
         else
@@ -48,7 +48,7 @@ public class Stamina : MonoBehaviour
         StartCoroutine(PillsTaken(increaseModAdder, decreaseRest, durability));
     }
 
-    IEnumerator Rest()
+    private IEnumerator Rest()
     {
         isLow = true;
         yield return new WaitForSeconds(timeRest);

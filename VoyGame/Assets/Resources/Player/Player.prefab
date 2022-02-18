@@ -152,7 +152,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &99423931
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2232,17 +2232,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemsPosition: {fileID: 4276419048666148837}
+  _mainItem: {fileID: 0}
+  _mainPlayer: {fileID: 0}
   haveMainItem: 0
   _adrenalineText: {fileID: 470889702}
   maxPillsAmount: 3
   pillsAmount: 0
-  _flareGunAmmoText: {fileID: 1774018485}
   _flareGunAmmoUI: {fileID: 947285339}
+  _gunPrefab: {fileID: 100004, guid: dddb6335529eb194f83735c0842fff4f, type: 3}
+  flareGunAmmoTextScript: {fileID: 1774018485}
   haveGun: 0
   maxAmmoAmount: 2
   currentAmmoAmount: 0
-  _gunPrefab: {fileID: 100004, guid: dddb6335529eb194f83735c0842fff4f, type: 3}
-  _flareGunAmmoTextScript: {fileID: 1774018485}
   _lampPrefab: {fileID: 3262653784818972533, guid: adba5d3e1d7ac1c448119d38c2d6a59b, type: 3}
   _compassPrefab: {fileID: 1896396696735486796, guid: 24254a23f381663499d981b4ef0cbe9c, type: 3}
   _compassUI: {fileID: 1373810398}
@@ -2316,6 +2317,7 @@ MonoBehaviour:
   _flashlightMesh: {fileID: 4276419049462432962}
   _objects:
   - {fileID: 1012311294977739548}
+  - {fileID: 99423927}
 --- !u!1 &1012311294977739548
 GameObject:
   m_ObjectHideFlags: 0
@@ -2560,7 +2562,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 733537943415492121, guid: 690adb3e96501d64891ffbf5f58e4ddc, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 733537943565665188, guid: 690adb3e96501d64891ffbf5f58e4ddc, type: 3}
       propertyPath: m_Color.b
@@ -2580,11 +2582,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 733537943565665190, guid: 690adb3e96501d64891ffbf5f58e4ddc, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 733537943565665190, guid: 690adb3e96501d64891ffbf5f58e4ddc, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 733537943841213958, guid: 690adb3e96501d64891ffbf5f58e4ddc, type: 3}
       propertyPath: m_Color.b

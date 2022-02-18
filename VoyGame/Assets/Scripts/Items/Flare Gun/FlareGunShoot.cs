@@ -31,7 +31,7 @@ public class FlareGunShoot : MonoBehaviourPunCallbacks
         if(Input.GetMouseButtonDown(1) && !_gunAnimation.isPlaying) 
             photonView.RPC("Shoot", RpcTarget.All);
         if(Input.GetKeyDown(KeyCode.R) && !_gunAnimation.isPlaying) 
-            photonView.RPC("Reload", RpcTarget.All);
+            Reload();
     }
   
     [PunRPC]
@@ -56,7 +56,6 @@ public class FlareGunShoot : MonoBehaviourPunCallbacks
         Destroy(_bulletParticles, 1.5f);
     }
     
-    [PunRPC]
     private void Reload()
     {
         if(_bulletsInWeaponLeft <= 0 && itemInventoryScript.currentAmmoAmount != 0){
@@ -64,6 +63,10 @@ public class FlareGunShoot : MonoBehaviourPunCallbacks
             _gunAnimation.CrossFade("Reload");
             _bulletsInWeaponLeft++;
             itemInventoryScript.currentAmmoAmount--;
+            
+            if(!photonView.IsMine && PhotonNetwork.IsConnected)
+                return;
+            
             flareGunAmmoTextScript.SetText();
         }
     }

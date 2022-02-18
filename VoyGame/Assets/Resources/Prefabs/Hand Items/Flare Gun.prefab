@@ -123,6 +123,8 @@ GameObject:
   - component: {fileID: 11100000}
   - component: {fileID: 8200000}
   - component: {fileID: 8357007524182044139}
+  - component: {fileID: -4395868955965630489}
+  - component: {fileID: 237431805653060158}
   m_Layer: 0
   m_Name: Flare Gun
   m_TagString: Untagged
@@ -276,8 +278,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 954452df6a7dcb04c986cd7292fe5a62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _itemInventoryScript: {fileID: 0}
-  _flareGunAmmoTextScript: {fileID: 0}
   _flareBullet: {fileID: 100002, guid: 502f397bde12655448ff152eac00cdc7, type: 3}
   _firePoint: {fileID: 400002}
   _weaponAudio:
@@ -285,6 +285,45 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 33b4f082caddfbd479b447561a4339b4, type: 3}
   - {fileID: 8300000, guid: 83c52e0124588cb41b7c1c200f457a50, type: 3}
   _gunShootParticles: {fileID: 101206, guid: 0d6d0598d4c6d514bbf8228309023a4d, type: 3}
+  itemInventoryScript: {fileID: 0}
+  flareGunAmmoTextScript: {fileID: 0}
+--- !u!114 &-4395868955965630489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &237431805653060158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d9a58fe310489140b9c5dbbac01565f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _position: {x: 0.17, y: -0.15, z: 0.25}
+  _rotation: {x: 0, y: -0.9961947, z: 0, w: 0.087155804}
+  _scale: {x: 0.05, y: 0.05, z: 0.05}
 --- !u!1 &100006
 GameObject:
   m_ObjectHideFlags: 0
