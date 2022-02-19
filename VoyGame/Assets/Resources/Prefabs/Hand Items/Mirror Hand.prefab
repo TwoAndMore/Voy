@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1970890040346233008}
   - component: {fileID: 4471138110683169488}
   - component: {fileID: 1878468630758145561}
+  - component: {fileID: -6453610698893385343}
   m_Layer: 0
   m_Name: Mirror Hand
   m_TagString: Mirror
@@ -149,7 +150,21 @@ MonoBehaviour:
   _reloadedSound: {fileID: 8300000, guid: acfa15ed3fbfc5a47b2ae5f312c019b1, type: 3}
   _particles: {fileID: 3043210864369699355}
   _glassMaterial: {fileID: 2100000, guid: de5f4dd8d637ebc4bb1a199d62e3a10a, type: 2}
-  player: {fileID: 0}
+--- !u!114 &-6453610698893385343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451744556565934703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d9a58fe310489140b9c5dbbac01565f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _position: {x: -0.1, y: 0.13, z: 0}
+  _rotation: {x: 0.36785898, y: -0.10548188, z: -0.25465572, w: -0.88808995}
+  _scale: {x: 1, y: 1, z: 1}
 --- !u!1 &4960245102856839386
 GameObject:
   m_ObjectHideFlags: 0

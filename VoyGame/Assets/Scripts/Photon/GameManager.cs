@@ -31,8 +31,10 @@ public class GameManager : MonoBehaviourPunCallbacks
     public override void OnLeftRoom() => 
         SceneManager.LoadScene("MainMenu");
 
-    public override void OnPlayerLeftRoom(Player otherPlayer) => 
-        Log(otherPlayer.NickName + "Disconnected");
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        //Log(otherPlayer.NickName + "Disconnected");
+    }
 
     public void LeaveButton() =>
         PhotonNetwork.LeaveRoom();

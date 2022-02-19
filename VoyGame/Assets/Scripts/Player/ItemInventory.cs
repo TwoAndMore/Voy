@@ -159,9 +159,11 @@ public class ItemInventory : MonoBehaviourPunCallbacks
     public void AddMirror()
     {
         haveMainItem = true;
+        /*if (photonView.IsMine)
+        {
+           // GameObject mirror = PhotonNetwork.Instantiate(HANDITEMSPATH + _mirrorPrefab.name, _itemsPosition.position, Quaternion.identity);
+        }*/
         GameObject mirror = Instantiate(_mirrorPrefab, _itemsPosition);
-        mirror.transform.localPosition = new Vector3(0f, 0.13f, 0f);
-        mirror.GetComponent<Mirror>().player = gameObject;
     }
     
     #endregion

@@ -13,7 +13,10 @@ public class Mirror : MonoBehaviourPunCallbacks
     [SerializeField] private AudioClip _reloadedSound;
     [SerializeField] private GameObject _particles;
     [SerializeField] private Material _glassMaterial;
-    
+
+    private CharacterController _playerCharacterController;
+    private PhotonView _photonView;
+    private GameObject _player;
     private Vector3 _startPosition;
     private Transform _teleportPosition;
     private AudioSource _audioSource;
@@ -24,19 +27,20 @@ public class Mirror : MonoBehaviourPunCallbacks
     private float _reloadTime = 5f;
     private float _delayTIme = 4f;
     private float _dimensionTime = 10f;
-    
-    public GameObject player;
-    
+
     private void Awake()
     {
         _glassMaterial.color = _mainColor;
         _teleportPosition = GameObject.FindWithTag(DIMENSIONTAG).transform;
         _audioSource = GetComponent<AudioSource>();
+        _player = transform.root.gameObject;
+        _playerCharacterController = _player.GetComponent<CharacterController>();
+        _photonView = _player.GetComponent<PhotonView>();
     }
     
     private void Update()
     {
-        if(!photonView.IsMine && PhotonNetwork.IsConnected)
+        if(!_photonView.IsMine && PhotonNetwork.IsConnected)
             return;
         
         if (Input.GetKeyDown(ACTIVATECODE) && !_isReloading)
@@ -45,7 +49,7 @@ public class Mirror : MonoBehaviourPunCallbacks
 
     private void Teleport()
     {
-        _startPosition = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
+        _startPosition = new Vector3(_player.transform.position.x, _player.transform.position.y, _player.transform.position.z);
         _audioSource.PlayOneShot(_dimensionSound);
         ChangePlayerPosition(_teleportPosition);
         StartCoroutine(Reload());
@@ -54,7 +58,7 @@ public class Mirror : MonoBehaviourPunCallbacks
 
     private void TeleportBack()
     {
-        Transform oldPosition = player.transform;
+        Transform oldPosition = _player.transform;
         oldPosition.transform.position = _startPosition;
         ChangePlayerPosition(oldPosition);
     }
@@ -67,9 +71,9 @@ public class Mirror : MonoBehaviourPunCallbacks
 
     private void ChangePlayerPosition(Transform newPosition)
     {
-        player.GetComponent<CharacterController>().enabled = false;
-        player.transform.position = newPosition.position;
-        player.GetComponent<CharacterController>().enabled = true;
+        _playerCharacterController.enabled = false;
+        _player.transform.position = newPosition.position;
+        _playerCharacterController.enabled = true;
     }
 
     private IEnumerator Delay()

@@ -11,7 +11,13 @@ public class PauseMenu : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             _isPaused = !_isPaused;
-            _pauseCanvas.SetActive(_isPaused);
+            SetActivePause(_isPaused);
         }
+    }
+
+    public void SetActivePause(bool status)
+    {
+        _pauseCanvas.SetActive(status);
+        Cursor.visible = status;
     }
 }
