@@ -16,8 +16,8 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     private CharacterController _controller;
     private Vector3 _velocity;
     private float _speed = STANDARTSPEED;
-    private float _gravity = -9.81f;
-    private float _jumpHeight = 3f;
+    private float _gravity = -30f;
+    private float _jumpHeight = 1f;
     private float _groundDistance = 0.4f;
     private bool _isGrounded;
     private bool _isCrouch;

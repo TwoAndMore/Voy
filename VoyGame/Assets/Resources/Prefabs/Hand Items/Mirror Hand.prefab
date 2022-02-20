@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4471138110683169488}
   - component: {fileID: 1878468630758145561}
   - component: {fileID: -6453610698893385343}
+  - component: {fileID: 2556479591142845257}
   m_Layer: 0
   m_Name: Mirror Hand
   m_TagString: Mirror
@@ -165,6 +166,39 @@ MonoBehaviour:
   _position: {x: -0.1, y: 0.13, z: 0}
   _rotation: {x: 0.36785898, y: -0.10548188, z: -0.25465572, w: -0.88808995}
   _scale: {x: 1, y: 1, z: 1}
+--- !u!215 &2556479591142845257
+ReflectionProbe:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451744556565934703}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Type: 0
+  m_Mode: 0
+  m_RefreshMode: 0
+  m_TimeSlicingMode: 0
+  m_Resolution: 128
+  m_UpdateFrequency: 0
+  m_BoxSize: {x: 2, y: 2, z: 2}
+  m_BoxOffset: {x: 0, y: 0, z: 0}
+  m_NearClip: 0.3
+  m_FarClip: 10
+  m_ShadowDistance: 100
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.21026169, g: 0.22021234, b: 0.23584908, a: 0}
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IntensityMultiplier: 1
+  m_BlendDistance: 1
+  m_HDR: 1
+  m_BoxProjection: 0
+  m_RenderDynamicObjects: 0
+  m_UseOcclusionCulling: 1
+  m_Importance: 1
+  m_CustomBakedTexture: {fileID: 0}
 --- !u!1 &4960245102856839386
 GameObject:
   m_ObjectHideFlags: 0

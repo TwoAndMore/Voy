@@ -11,7 +11,7 @@ public class QuestItemsInventory : MonoBehaviour
     
     [SerializeField] private GameObject[] _items;
 
-    public QuestItem[] questItemsArray = new QuestItem[7];
+    public QuestItem[] questItemsArray = new QuestItem[15];
 
     private void Awake()
     {
@@ -22,6 +22,16 @@ public class QuestItemsInventory : MonoBehaviour
         questItemsArray[4].name = "Bible";
         questItemsArray[5].name = "Cross";
         questItemsArray[6].name = "Match";
+        
+        //Letters
+        questItemsArray[7].name = "Paper1";
+        questItemsArray[8].name = "Paper2";
+        questItemsArray[9].name = "Paper3";
+        questItemsArray[10].name = "Paper4";
+        questItemsArray[11].name = "Paper5";
+        questItemsArray[12].name = "Paper6";
+        questItemsArray[13].name = "Paper7";
+        questItemsArray[14].name = "Paper8";
 
         for (int i = 0; i < questItemsArray.Length; i++) 
             questItemsArray[i].isFinded = true;

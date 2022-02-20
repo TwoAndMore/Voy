@@ -7,7 +7,9 @@ public class AdrenalineText : MonoBehaviour
     
     private TextMeshProUGUI _text;
 
-    private void Awake() => _text = GetComponent<TextMeshProUGUI>();
+    private void Awake() => 
+        _text = GetComponent<TextMeshProUGUI>();
 
-    public void SetText() => _text.text = _itemInventoryScript.pillsAmount.ToString();
+    public void SetText() => 
+        _text.text = _itemInventoryScript.pillsAmount.ToString();
 }

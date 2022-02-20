@@ -10,10 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1681499868529296951}
   - component: {fileID: 1681499868529296950}
-  - component: {fileID: 1681499868529296949}
-  - component: {fileID: 1681499868529296948}
   - component: {fileID: 1681499868529296939}
+  - component: {fileID: 5408489653296812229}
+  - component: {fileID: 1681499868529296949}
   - component: {fileID: 1334250826793679732}
+  - component: {fileID: 3631213443777463512}
   m_Layer: 0
   m_Name: Magic Lamp
   m_TagString: QuestItem
@@ -45,9 +46,9 @@ AudioSource:
   m_GameObject: {fileID: 1681499868529296938}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  OutputAudioMixerGroup: {fileID: 1658395006962320170, guid: aca1ded38bea38b42ba6c8b21ac8e561, type: 2}
+  m_audioClip: {fileID: 8300000, guid: f27dd859701e20140ada74e809779ed9, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
@@ -57,9 +58,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 20
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -92,7 +93,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -132,6 +133,32 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!65 &1681499868529296939
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1681499868529296938}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.55368495, y: 0.6272485, z: 1.1869297}
+  m_Center: {x: 0, y: -0.23210895, z: -0.09346485}
+--- !u!135 &5408489653296812229
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1681499868529296938}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1681499868529296949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,37 +173,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineMode: 1
   outlineColor: {r: 1, g: 0, b: 0, a: 1}
-  outlineWidth: 10
+  outlineWidth: 8
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!114 &1681499868529296948
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1681499868529296938}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f7e9b0f878b7ac41bd712094c5de5bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _pickUpSound: {fileID: 8300000, guid: f27dd859701e20140ada74e809779ed9, type: 3}
-  _itemID: 1
---- !u!65 &1681499868529296939
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1681499868529296938}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.55368495, y: 0.6272485, z: 1.1869297}
-  m_Center: {x: 0, y: -0.23210895, z: -0.09346485}
 --- !u!114 &1334250826793679732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,6 +191,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 5cf502e1f975e824096cfbcf7f641d75, type: 3}
   image: {fileID: 0}
+--- !u!114 &3631213443777463512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1681499868529296938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 555abcce0ebf1e24593e4f5aa72fb815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _itemID: 1
+  _player: {fileID: 0}
 --- !u!1001 &1681499868873438793
 PrefabInstance:
   m_ObjectHideFlags: 0

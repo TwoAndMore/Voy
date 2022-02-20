@@ -44,14 +44,12 @@ public class ItemInventory : MonoBehaviourPunCallbacks
     [Header("Mirror")] 
     [SerializeField] private GameObject _mirrorPrefab;
 
-    public int _code;
-
     private void Awake() => _staminaScript = GetComponent<Stamina>();
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P))
-            photonView.TransferOwnership(_code);
+        if(!photonView.IsMine && PhotonNetwork.IsConnected)
+            return;
         
         TakePills();
     }
@@ -79,6 +77,10 @@ public class ItemInventory : MonoBehaviourPunCallbacks
     public void AddPill()
     {
         pillsAmount += 1;
+        
+        if(!photonView.IsMine && PhotonNetwork.IsConnected)
+            return;
+        
         _adrenalineText.SetText();
     }
 
@@ -159,10 +161,7 @@ public class ItemInventory : MonoBehaviourPunCallbacks
     public void AddMirror()
     {
         haveMainItem = true;
-        /*if (photonView.IsMine)
-        {
-           // GameObject mirror = PhotonNetwork.Instantiate(HANDITEMSPATH + _mirrorPrefab.name, _itemsPosition.position, Quaternion.identity);
-        }*/
+        
         GameObject mirror = Instantiate(_mirrorPrefab, _itemsPosition);
     }
     
