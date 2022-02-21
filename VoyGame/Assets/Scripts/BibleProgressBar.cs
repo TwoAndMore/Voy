@@ -5,20 +5,20 @@ public class BibleProgressBar : MonoBehaviour
 {
     [SerializeField] private Image _fillImage;
     
-    private Coffin _coffinScript;
+    private CoffinEvent _coffinScript;
     private Slider _slider;
 
     private void Awake()
     {
-        _coffinScript = GameObject.Find("Coffin").GetComponent<Coffin>();
+        _coffinScript = GameObject.Find("Coffin").GetComponent<CoffinEvent>();
         _slider = GetComponent<Slider>();
-        _slider.maxValue = _coffinScript.maxBibleProgressValue;
-        _slider.value = _coffinScript.currentBibleProgressValue;
+        _slider.maxValue = _coffinScript.maxBibleProgress;
+        _slider.value = _coffinScript.currentBibleProgress;
     }
     
     private void Update()
     {
-        _slider.value = _coffinScript.currentBibleProgressValue;
+        _slider.value = _coffinScript.currentBibleProgress;
         _fillImage.fillAmount = _slider.value / _slider.maxValue;
     }
 }

@@ -7,8 +7,8 @@ public class MoanSound : MonoBehaviour
     [SerializeField] private AudioClip[] _audioClips;
 
     private AudioSource _audioSource;
+    private float _delayTime;
     private bool _isReloading;
-    [SerializeField] private float _delayTime;
 
     private void Awake() => 
         _audioSource = GetComponent<AudioSource>();
@@ -21,7 +21,7 @@ public class MoanSound : MonoBehaviour
         if(_isReloading)
             return;
         
-        _delayTime = Random.Range(10f, 60f);
+        _delayTime = Random.Range(5f, 15f);
         _audioSource.PlayOneShot(_audioClips[Random.Range(0, _audioClips.Length)]);
         StartCoroutine(Delay());
     }
