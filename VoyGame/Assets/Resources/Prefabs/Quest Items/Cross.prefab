@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2376146023437486284}
   - component: {fileID: -5686931012795249380}
   - component: {fileID: -5834458681502820491}
+  - component: {fileID: 4742926549219678618}
   m_Layer: 0
   m_Name: Cross
   m_TagString: QuestItem
@@ -205,6 +206,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemID: 5
   _player: {fileID: 0}
+--- !u!114 &4742926549219678618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2376146023437486287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &6178503113700619553
 PrefabInstance:
   m_ObjectHideFlags: 0

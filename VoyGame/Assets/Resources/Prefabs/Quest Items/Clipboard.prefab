@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 5852030737949292776}
   - component: {fileID: -4548667597008792981}
   - component: {fileID: -7399389338500729743}
+  - component: {fileID: -3415457114205568127}
   m_Layer: 0
   m_Name: Clipboard
   m_TagString: QuestItem
@@ -287,6 +288,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemID: 7
   _player: {fileID: 0}
+--- !u!114 &-3415457114205568127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7459282556842870153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &7460138043909180659
 GameObject:
   m_ObjectHideFlags: 0

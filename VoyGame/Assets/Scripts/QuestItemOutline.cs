@@ -1,17 +1,16 @@
+using Photon.Pun;
 using UnityEngine;
 
-public class QuestItemOutline : MonoBehaviour
+public class QuestItemOutline : MonoBehaviourPunCallbacks
 {
     [SerializeField] private int _itemID;
-    [SerializeField] private GameObject _player;
 
     private QuestItemsInventory _questItemsInventory;
     private Outline _outline;
     private AudioSource _audioSource;
     private Collider _collider;
     private bool _inRange;
-    private bool _firstClick;
-    
+
     private void Awake()
     {
         _collider = GetComponent<Collider>();
@@ -40,10 +39,7 @@ public class QuestItemOutline : MonoBehaviour
         if(!_inRange)
             return;
         
-        _collider.enabled = false;
-        _questItemsInventory.AddItem(_itemID);
-        _audioSource.Play();
-        Destroy(gameObject, 0.29f);
+        photonView.RPC("TakeQuestItem", RpcTarget.AllViaServer);
     }
 
     private void SetTrigger(bool status, GameObject obj)
@@ -52,7 +48,14 @@ public class QuestItemOutline : MonoBehaviour
             return;
         
         _inRange = status;
+    }
 
-        _player = status ? obj : null;
+    [PunRPC]
+    private void TakeQuestItem()
+    {
+        _collider.enabled = false;
+        _questItemsInventory.AddItem(_itemID);
+        _audioSource.Play();
+        Destroy(gameObject, 0.29f);
     }
 }

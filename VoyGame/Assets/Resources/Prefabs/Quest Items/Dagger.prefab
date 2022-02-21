@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7642505831078884462}
   - component: {fileID: 1610722928039127266}
   - component: {fileID: -8127562993876591857}
+  - component: {fileID: -837214051403683621}
   m_Layer: 0
   m_Name: Dagger
   m_TagString: QuestItem
@@ -205,6 +206,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemID: 3
   _player: {fileID: 0}
+--- !u!114 &-837214051403683621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7642505831078884466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &7642505831917728797
 PrefabInstance:
   m_ObjectHideFlags: 0

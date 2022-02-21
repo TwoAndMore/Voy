@@ -2200,9 +2200,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   _animator: {fileID: 5895950826445625045}
-  _gravity: -30
-  _jumpHeight: 3
-  _groundDistance: 0.4
   isRunning: 0
 --- !u!114 &1012311293499714703
 MonoBehaviour:

@@ -1,3 +1,4 @@
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -36,7 +37,8 @@ public class QuestItemsInventory : MonoBehaviour
         for (int i = 0; i < questItemsArray.Length; i++) 
             questItemsArray[i].isFinded = true;
     }
-
+    
+    [PunRPC]
     public void AddItem(int ID)
     {
         questItemsArray[ID].isFinded = true;
