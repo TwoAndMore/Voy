@@ -16,6 +16,7 @@ TagManager:
   - Slimster
   - QuestItem
   - Cross
+  - Coffin
   layers:
   - Default
   - TransparentFX

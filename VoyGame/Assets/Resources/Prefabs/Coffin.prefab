@@ -799,9 +799,10 @@ GameObject:
   - component: {fileID: 1735808589166365498}
   - component: {fileID: 8442360168177484141}
   - component: {fileID: 1733961869201845248}
+  - component: {fileID: -3404585221715259534}
   m_Layer: 0
   m_Name: Coffin
-  m_TagString: Untagged
+  m_TagString: Coffin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1022,8 +1023,31 @@ MonoBehaviour:
   - {fileID: 0}
   _bookPrefab: {fileID: 707605880908462196, guid: f43eed441a9f3f340b56365738b91e93, type: 3}
   _biblePutSound: {fileID: 8300000, guid: f58b93eff5009e147a5df0fa56d3f53d, type: 3}
+  pressFIcon: {fileID: 0}
   maxBibleProgress: 100
   currentBibleProgress: 0
+--- !u!114 &-3404585221715259534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1735808589166365500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &6241808202168428242
 GameObject:
   m_ObjectHideFlags: 0

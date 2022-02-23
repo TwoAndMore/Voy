@@ -31,7 +31,7 @@ public class PickUpItems : MonoBehaviourPunCallbacks
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Cross"))
+        if(other.CompareTag("Cross") || other.CompareTag("Player"))
             return;
         
         _inRange = true;

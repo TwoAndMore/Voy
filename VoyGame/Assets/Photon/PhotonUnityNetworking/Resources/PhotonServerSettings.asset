@@ -55,6 +55,11 @@ MonoBehaviour:
   - TakeQuestItem
   - ActivateTorch
   - ActivateTotem
+  - PutBible
+  - StartReading
+  - StopReading
+  - StartRead
+  - StopRead
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
