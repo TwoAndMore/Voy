@@ -1024,6 +1024,9 @@ MonoBehaviour:
   _bookPrefab: {fileID: 707605880908462196, guid: f43eed441a9f3f340b56365738b91e93, type: 3}
   _biblePutSound: {fileID: 8300000, guid: f58b93eff5009e147a5df0fa56d3f53d, type: 3}
   pressFIcon: {fileID: 0}
+  playerReading: {fileID: 0}
+  isReading: 0
+  isBookPlaced: 0
   maxBibleProgress: 100
   currentBibleProgress: 0
 --- !u!114 &-3404585221715259534

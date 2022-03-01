@@ -1,3 +1,4 @@
+using System;
 using Photon.Pun;
 using UnityEngine;
 
@@ -71,6 +72,12 @@ public class CoffinEvent : MonoBehaviourPunCallbacks
     private void OnMouseDown() =>
         photonView.RPC("PutBible", RpcTarget.AllViaServer);
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Slimster"))
+            GameLost();
+    }
+
     [PunRPC]
     private void PutBible()
     {
@@ -81,6 +88,8 @@ public class CoffinEvent : MonoBehaviourPunCallbacks
         Instantiate(_bookPrefab, _bookPlace);
         _audioSource.PlayOneShot(_biblePutSound);
         _progressBar.SetActive(true);
+        
+        GlobalEventManager.SendBiblePut();
     }
 
     public void StartReading()
@@ -102,7 +111,13 @@ public class CoffinEvent : MonoBehaviourPunCallbacks
     public void GameLost()
     {
         _isLost = true;
+
+        _slimstersCircle.SetActive(false);
         StopReading();
+        
+        Debug.Log("Game Lost");
+        GlobalEventManager.SendGameOver();
+        Debug.Log("Sended");
     }
 
     public void ReadObjectsActivation(bool status, GameObject player)
@@ -113,7 +128,7 @@ public class CoffinEvent : MonoBehaviourPunCallbacks
         _bibleScreen.SetActive(status);
 
         if (!status)
-            this.playerReading = null;
+            playerReading = null;
     }
 
     public bool IsObjectsActivated()

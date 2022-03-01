@@ -2554,6 +2554,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4276419048666148837}
   - component: {fileID: 4276419048666148838}
+  - component: {fileID: 7208994159795130674}
   m_Layer: 0
   m_Name: SwayThings
   m_TagString: Untagged
@@ -2591,6 +2592,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _smooth: 8
   _swayMultiplier: 3
+--- !u!114 &7208994159795130674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4276419048666148836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a85e6ce502ed42d4db2653d74ede3106, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _crossObject: {fileID: 619369565967276424}
 --- !u!1001 &1440577598338377047
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3222,14 +3236,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400154, guid: 765e2fde8c84f094e99304c6198491ea, type: 3}
   m_PrefabInstance: {fileID: 5895950826452984757}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &5895950826445625045 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 9500000, guid: 765e2fde8c84f094e99304c6198491ea, type: 3}
-  m_PrefabInstance: {fileID: 5895950826452984757}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5895950826453017743 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100154, guid: 765e2fde8c84f094e99304c6198491ea, type: 3}
+  m_PrefabInstance: {fileID: 5895950826452984757}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &5895950826445625045 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9500000, guid: 765e2fde8c84f094e99304c6198491ea, type: 3}
   m_PrefabInstance: {fileID: 5895950826452984757}
   m_PrefabAsset: {fileID: 0}
 --- !u!82 &4276419048193975214
