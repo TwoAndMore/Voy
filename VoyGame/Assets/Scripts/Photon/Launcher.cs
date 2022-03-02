@@ -12,25 +12,26 @@ public class Launcher : MonoBehaviourPunCallbacks
     private const string GAMEVERSION = "1";
     private const byte MAXPLAYERSPERROOM = 4;
     private const int CONNECTAGAINTIME = 5;
-    
+
+    [SerializeField] private GameObject _music;
     [SerializeField] private GameObject _connectPanel;
-    [SerializeField] private TextMeshProUGUI _connectingText;
     [SerializeField] private GameObject _buttonRoomPrefab;
     [SerializeField] private GameObject _roomListContent;
+    [SerializeField] private Animator _cameraAnimator;
+    [SerializeField] private TextMeshProUGUI _connectingText;
     [SerializeField] private TMP_InputField _nickNameField;
     [SerializeField] private List<RoomInfo> _roomList;
 
     private void Start()
     {
         Connect();
-        //StartCoroutine(WaitBeforeJoin());
     }
 
     public override void OnConnectedToMaster()
     {
-        //PhotonNetwork.JoinLobby();
-        
         StartCoroutine(FadingImage(_connectPanel.GetComponent<Image>()));
+        _music.SetActive(true);
+        _cameraAnimator.enabled = true;
         _connectingText.text = "CONNECTED";
         CreateRoom();
     }
@@ -101,15 +102,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         else
             PhotonNetwork.CreateRoom(_nickNameField.text,  new RoomOptions(){MaxPlayers = MAXPLAYERSPERROOM, });
     }
-
-    private IEnumerator WaitBeforeJoin()
-    {
-        yield return new WaitForSeconds(1.3f);
-        PhotonNetwork.JoinOrCreateRoom(MAXPLAYERSPERROOM.ToString(), new RoomOptions() { MaxPlayers = MAXPLAYERSPERROOM }, null);
-        yield return new WaitForSeconds(1.3f);
-        //PhotonNetwork.LoadLevel(SceneManager.GetActiveScene().name);
-    }
-
+    
     private IEnumerator FadingImage(Image image)
     {
         float colorDecrease = 1f;

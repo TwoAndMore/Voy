@@ -6,7 +6,7 @@ public class IfIsMineEnable : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject _flashlightMesh;
     
     [SerializeField] private GameObject[] _objects;
-    
+
     private GameObject _playerBody;
 
     private void Awake()
@@ -17,14 +17,13 @@ public class IfIsMineEnable : MonoBehaviourPunCallbacks
     private void Start()
     {
         if (!photonView.IsMine && PhotonNetwork.IsConnected)
-        {
             return;
-        }
-    
+
         ChangeChildrenLayer(_playerBody, "PlayerBody");
         _flashlightMesh.layer = LayerMask.NameToLayer("PlayerBody");
 
         StartEnable();
+        ComponentsEnable();
     }
 
     private void StartEnable()
@@ -33,6 +32,11 @@ public class IfIsMineEnable : MonoBehaviourPunCallbacks
             obj.SetActive(true);
     }
 
+    private void ComponentsEnable()
+    {
+        GetComponent<Stamina>().enabled = true;
+    }
+    
     private void ChangeChildrenLayer(GameObject obj, string layerMaskName)
     {
         foreach (Transform trans in obj.GetComponentsInChildren<Transform>(true))

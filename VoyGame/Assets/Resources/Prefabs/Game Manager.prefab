@@ -432,7 +432,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -481,6 +481,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameManager: {fileID: 2922638208462478549}
+  _text: {fileID: 1141192182}
 --- !u!1 &1467210658
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     
     public static GameManager Instance;
 
-    public float looseGoMenuTime = 15f;
+    public int looseGoMenuTime = 15;
 
     private void Awake() => 
         GlobalEventManager.OnGameOver.AddListener(GameOverYouLost);
@@ -38,7 +38,6 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     private void GameOverYouLost()
     {
-        Debug.Log("asoidasjdsuhsadashdadshoiaoashashoi");
         _gameOverScreen.SetActive(true);
         StartCoroutine(YouLost());
     }

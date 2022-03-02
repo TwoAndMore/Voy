@@ -25,7 +25,7 @@ RenderSettings:
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 0
-  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
+  m_SubtractiveShadowColor: {r: 0.43173727, g: 0.4857667, b: 0.6226415, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
@@ -2712,7 +2712,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh59304
+  m_Name: pb_Mesh22488
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3079,7 +3079,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh59284
+  m_Name: pb_Mesh22468
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4461,7 +4461,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh59126
+  m_Name: pb_Mesh22338
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5231,7 +5231,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh59212
+  m_Name: pb_Mesh22414
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -8319,7 +8319,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1227701034}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.47, y: 0, z: 0}
+  m_LocalPosition: {x: 0.823, y: 0.92, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2001279334}
@@ -8337,13 +8337,13 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 5.4
-  m_Range: 10
+  m_Intensity: 9.29
+  m_Range: 17.18
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -8376,7 +8376,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -14413,7 +14413,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh59018
+  m_Name: pb_Mesh22228
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -16629,7 +16629,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh59140
+  m_Name: pb_Mesh22352
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -16859,7 +16859,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh58920
+  m_Name: pb_Mesh22138
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -17023,7 +17023,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh58932
+  m_Name: pb_Mesh22150
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -17607,22 +17607,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1141192182, guid: a5343e445a85a1d4ebea3d386179fcd7, type: 3}
-      propertyPath: m_fontStyle
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1141192182, guid: a5343e445a85a1d4ebea3d386179fcd7, type: 3}
-      propertyPath: m_enableAutoSizing
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1141192182, guid: a5343e445a85a1d4ebea3d386179fcd7, type: 3}
-      propertyPath: m_overrideHtmlColors
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1141192182, guid: a5343e445a85a1d4ebea3d386179fcd7, type: 3}
-      propertyPath: m_enableVertexGradient
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2922638208462478546, guid: a5343e445a85a1d4ebea3d386179fcd7, type: 3}
       propertyPath: m_RootOrder
       value: 12

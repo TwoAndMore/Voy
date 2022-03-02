@@ -1,18 +1,25 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
 public class LooseTimer : MonoBehaviour
 {
     [SerializeField] private GameManager _gameManager;
-
-    private TextMeshProUGUI _text;
+    [SerializeField] private TextMeshProUGUI _text;
     
-    private void Awake() => 
-        _text = GetComponent<TextMeshProUGUI>();
-
-    private void FixedUpdate()
+    private void Start()
     {
-        _gameManager.looseGoMenuTime -= Time.deltaTime;
-        _text.text = ((int) _gameManager.looseGoMenuTime).ToString();
+        StartCoroutine(TimerUpdate());
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    private IEnumerator TimerUpdate()
+    {
+        for (int i = _gameManager.looseGoMenuTime; i > 0; i--)
+        {
+            _text.text = i.ToString();
+            yield return new WaitForSeconds(1f);
+        }
     }
 }
