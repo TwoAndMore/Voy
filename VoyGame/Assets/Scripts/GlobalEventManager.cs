@@ -9,10 +9,6 @@ public class GlobalEventManager : MonoBehaviour
     public static void SendBiblePut() => 
         OnBiblePut.Invoke();
 
-    public static void SendGameOver()
-    {
-        Debug.Log("Going to invoke");
+    public static void SendGameOver() => 
         OnGameOver.Invoke();
-        Debug.Log("Invoked");
-    }
 }
