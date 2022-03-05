@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3953195846805328220}
   - component: {fileID: -1004426411638814733}
   - component: {fileID: -3731233346773210399}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hand Lamp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -262,7 +262,7 @@ GameObject:
   - component: {fileID: 3571952933101838918}
   - component: {fileID: 6984906190611310606}
   - component: {fileID: 3262653785838191113}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}

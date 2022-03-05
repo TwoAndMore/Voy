@@ -17,8 +17,8 @@ public class IfIsMineEnable : MonoBehaviourPunCallbacks
             return;
 
         ChangeChildrenLayer(_playerBody, "PlayerBody");
-        _playerHands.layer = LayerMask.NameToLayer("Default");
-        _playerTorso.layer = LayerMask.NameToLayer("Default");
+        _playerHands.layer = LayerMask.NameToLayer("Hand Item");
+        _playerTorso.layer = LayerMask.NameToLayer("Hand Item");
         _flashlightMesh.layer = LayerMask.NameToLayer("PlayerBody");
 
         StartEnable();

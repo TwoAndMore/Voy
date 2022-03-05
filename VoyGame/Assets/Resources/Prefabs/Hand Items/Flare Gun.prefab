@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 400000}
   - component: {fileID: 3300000}
   - component: {fileID: 2300000}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: body2
   m_TagString: FlareGun
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 400002}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 8357007524182044139}
   - component: {fileID: -4395868955965630489}
   - component: {fileID: 237431805653060158}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Flare Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -335,7 +335,7 @@ GameObject:
   - component: {fileID: 400006}
   - component: {fileID: 3300002}
   - component: {fileID: 2300002}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -416,7 +416,7 @@ GameObject:
   - component: {fileID: 400008}
   - component: {fileID: 3300004}
   - component: {fileID: 2300004}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hammer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -497,7 +497,7 @@ GameObject:
   - component: {fileID: 400010}
   - component: {fileID: 3300006}
   - component: {fileID: 2300006}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}

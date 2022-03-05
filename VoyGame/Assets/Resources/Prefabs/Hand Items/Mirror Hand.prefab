@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1878468630758145561}
   - component: {fileID: -6453610698893385343}
   - component: {fileID: 2556479591142845257}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mirror Hand
   m_TagString: Mirror
   m_Icon: {fileID: 0}
@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: 3345777613714730383}
   - component: {fileID: 2349996877604414360}
   - component: {fileID: 5052313656986488077}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Glass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -292,7 +292,7 @@ GameObject:
   - component: {fileID: 3383072483844533113}
   - component: {fileID: 432342032122078809}
   - component: {fileID: 3215462945421507358}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -373,7 +373,7 @@ GameObject:
   - component: {fileID: 2380823462412540110}
   - component: {fileID: 3958734066000418019}
   - component: {fileID: 5956546261841701731}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Outline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -471,8 +471,20 @@ PrefabInstance:
       value: PortalRedIdle
       objectReference: {fileID: 0}
     - target: {fileID: 7005205093467825493, guid: 325728388e90cda4d952b068eba74006, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7005205093467825493, guid: 325728388e90cda4d952b068eba74006, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7005205093468062285, guid: 325728388e90cda4d952b068eba74006, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7005205093468072611, guid: 325728388e90cda4d952b068eba74006, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7005205093468072611, guid: 325728388e90cda4d952b068eba74006, type: 3}
       propertyPath: m_IsActive
