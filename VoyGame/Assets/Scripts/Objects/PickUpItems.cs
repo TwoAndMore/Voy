@@ -5,6 +5,7 @@ public class PickUpItems : MonoBehaviourPunCallbacks
 {
     private const KeyCode PICKUP = KeyCode.E;
 
+    [SerializeField] private ChangeTargetPosition _changeTargetPositionScript;
     [SerializeField] private AudioClip _pickUpSound;
 
     private ItemInventory _itemInventoryScript;
@@ -67,6 +68,7 @@ public class PickUpItems : MonoBehaviourPunCallbacks
             if(_itemInventoryScript.haveMainItem)
                 return;
             _itemInventoryScript.AddFlareGun();
+            _changeTargetPositionScript.ActivateTarget("Gun");
         }
         else if (_item.CompareTag(_itemTags[2]))
         {
@@ -80,18 +82,21 @@ public class PickUpItems : MonoBehaviourPunCallbacks
                 return;
 
             _itemInventoryScript.AddLamp();
+            _changeTargetPositionScript.ActivateTarget("Lamp");
         }
         else if (_item.CompareTag(_itemTags[4]))
         {
             if(_itemInventoryScript.haveMainItem)
                 return;
-            _itemInventoryScript.AddCompass(); 
+            _itemInventoryScript.AddCompass();
+            _changeTargetPositionScript.ActivateTarget("Compass");
         }
         else if (_item.CompareTag(_itemTags[5]))
         {
             if(_itemInventoryScript.haveMainItem)
                 return;
-            _itemInventoryScript.AddMirror(); 
+            _itemInventoryScript.AddMirror();
+            _changeTargetPositionScript.ActivateTarget("Mirror");
         }
         
         _audioSource.PlayOneShot(_pickUpSound);

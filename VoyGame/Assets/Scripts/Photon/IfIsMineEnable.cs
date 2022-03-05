@@ -7,19 +7,18 @@ public class IfIsMineEnable : MonoBehaviourPunCallbacks
     
     [SerializeField] private GameObject[] _objects;
 
-    private GameObject _playerBody;
-
-    private void Awake()
-    {
-        _playerBody = transform.Find("Body").gameObject;
-    }
-
+    [SerializeField] private GameObject _playerBody;
+    [SerializeField] private GameObject _playerHands;
+    [SerializeField] private GameObject _playerTorso;
+    
     private void Start()
     {
         if (!photonView.IsMine && PhotonNetwork.IsConnected)
             return;
 
         ChangeChildrenLayer(_playerBody, "PlayerBody");
+        _playerHands.layer = LayerMask.NameToLayer("Default");
+        _playerTorso.layer = LayerMask.NameToLayer("Default");
         _flashlightMesh.layer = LayerMask.NameToLayer("PlayerBody");
 
         StartEnable();

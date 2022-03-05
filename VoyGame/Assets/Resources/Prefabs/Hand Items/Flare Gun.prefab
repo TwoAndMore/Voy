@@ -321,9 +321,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d9a58fe310489140b9c5dbbac01565f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _position: {x: 0.17, y: -0.15, z: 0.25}
-  _rotation: {x: 0, y: -0.9961947, z: 0, w: 0.087155804}
-  _scale: {x: 0.05, y: 0.05, z: 0.05}
+  _position: {x: 0.15, y: 0.03, z: 0.07}
+  _rotation: {x: -0.48629138, y: -0.5300564, z: 0.48720497, w: 0.49516895}
+  _scale: {x: 0.03, y: 0.03, z: 0.03}
 --- !u!1 &100006
 GameObject:
   m_ObjectHideFlags: 0

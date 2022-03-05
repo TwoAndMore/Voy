@@ -3,20 +3,20 @@ using UnityEngine;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject _pauseCanvas;
-    
-    private bool _isPaused = true;
-    
+
+    public static bool isPaused;
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape)) 
-            SetActivePause(_isPaused);
+            SetActivePause();
     }
 
-    public void SetActivePause(bool status)
+    public void SetActivePause()
     {
-        _isPaused = !_isPaused;
-        _pauseCanvas.SetActive(status);
-        Cursor.lockState = status ? CursorLockMode.None : CursorLockMode.Confined;
-        Cursor.visible = status;
+        isPaused = !isPaused;
+        _pauseCanvas.SetActive(isPaused);
+        Cursor.lockState = isPaused ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible = isPaused;
     }
 }

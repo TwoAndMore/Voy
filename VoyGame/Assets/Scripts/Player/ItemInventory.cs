@@ -44,7 +44,8 @@ public class ItemInventory : MonoBehaviourPunCallbacks
     [Header("Mirror")] 
     [SerializeField] private GameObject _mirrorPrefab;
 
-    private void Awake() => _staminaScript = GetComponent<Stamina>();
+    private void Awake() => 
+        _staminaScript = GetComponent<Stamina>();
 
     private void Update()
     {
@@ -162,7 +163,7 @@ public class ItemInventory : MonoBehaviourPunCallbacks
     {
         haveMainItem = true;
         
-        GameObject mirror = Instantiate(_mirrorPrefab, _itemsPosition);
+        Instantiate(_mirrorPrefab, _itemsPosition);
     }
     
     #endregion
@@ -190,7 +191,7 @@ public class ItemInventory : MonoBehaviourPunCallbacks
                 _mainPlayer = player;
         }
 
-        if(_mainPlayer != null)
-            _mainItem.transform.parent = _mainPlayer.transform.Find("CameraHolder/SwayThings");
+        if (_mainPlayer != null)
+            _mainItem.transform.parent = _mainPlayer.GetComponent<ItemInventory>()._itemsPosition;
     }
 }

@@ -3,20 +3,24 @@ using Photon.Pun;
 
 public class MouseLook : MonoBehaviourPunCallbacks
 {
-    [SerializeField] private float mouseSensitivity = 100f;
     [SerializeField] private Transform playerBody;
-    
+    [SerializeField] private float mouseSensitivity = 1f;
+
     private float xRotation;
     
-    private void Awake() => Cursor.lockState = CursorLockMode.Locked;
+    private void Awake() => 
+        Cursor.lockState = CursorLockMode.Locked;
 
-    private void FixedUpdate()
+    private void Update()
     {
         if(!photonView.IsMine && PhotonNetwork.IsConnected)
             return;
         
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.fixedDeltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.fixedDeltaTime;
+        if(PauseMenu.isPaused)
+            return;
+        
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
 
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);

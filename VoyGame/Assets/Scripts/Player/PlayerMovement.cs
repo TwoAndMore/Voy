@@ -1,5 +1,6 @@
 ﻿using Photon.Pun;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerMovement : MonoBehaviourPunCallbacks
 {
@@ -20,10 +21,10 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     private float _jumpHeight = 1f;
     private float _groundDistance = 0.4f;
     private bool _isGrounded;
-    private bool _isCrouch;
-    
+
+    public bool isCrouching;
     public bool isRunning;
-    
+
     private void Awake()
     {
         _staminaScript = GetComponent<Stamina>();
@@ -35,6 +36,9 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
         if(!photonView.IsMine && PhotonNetwork.IsConnected)
             return;
         
+        if(PauseMenu.isPaused)
+            return;
+        
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
         
@@ -44,7 +48,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
         _controller.Move(_velocity * Time.deltaTime);
 
         //Running
-        if (Input.GetKey(KeyCode.LeftShift) && !_isCrouch && _isGrounded && _staminaScript.HaveStamina() && !_staminaScript.isLow)
+        if (Input.GetKey(KeyCode.LeftShift) && !isCrouching && _isGrounded && _staminaScript.HaveStamina() && !_staminaScript.isLow)
         {
             isRunning = true;
             _speed = RUNSPEED;
@@ -58,24 +62,24 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
         //Crouching
         if (Input.GetKey(KeyCode.LeftControl) && _isGrounded)
         {
-            _isCrouch = true;
+            isCrouching = true;
             _speed = CROUCHSPEED;
         }
         else if(Input.GetKeyUp(KeyCode.LeftControl))
         {
-            _isCrouch = false;
+            isCrouching = false;
             _speed = STANDARTSPEED;
         }
         
-        _crouchPicture.SetActive(_isCrouch);
+        _crouchPicture.SetActive(isCrouching);
         
         Jump();
 
         //Animations
         _animator.SetBool("isWalking", move.x+move.z != 0f);
         _animator.SetBool("isRunning", _speed == RUNSPEED && move.x+move.z != 0f);
-        _animator.SetBool("isCrouching", _isCrouch);
-        _animator.SetBool("isCrouchWalking", _isCrouch && move.x+move.z != 0f);
+        _animator.SetBool("isCrouching", isCrouching);
+        _animator.SetBool("isCrouchWalking", isCrouching && move.x+move.z != 0f);
         _animator.SetBool("isJumping", !_isGrounded);
     }
 
@@ -83,7 +87,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     {
         _isGrounded = Physics.CheckSphere(_groundCheck.position, _groundDistance, _groundMask);
         
-        if(Input.GetButtonDown("Jump") && _isGrounded && !_isCrouch)
+        if(Input.GetButtonDown("Jump") && _isGrounded && !isCrouching)
         {
             _velocity.y = Mathf.Sqrt(_jumpHeight * -2f * _gravity);
             _animator.SetTrigger("Jump");
