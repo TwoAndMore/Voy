@@ -36,7 +36,7 @@ public class IfIsMineEnable : MonoBehaviourPunCallbacks
         GetComponent<Stamina>().enabled = true;
     }
     
-    private void ChangeChildrenLayer(GameObject obj, string layerMaskName)
+    public static void ChangeChildrenLayer(GameObject obj, string layerMaskName)
     {
         foreach (Transform trans in obj.GetComponentsInChildren<Transform>(true))
             trans.gameObject.layer = LayerMask.NameToLayer(layerMaskName);

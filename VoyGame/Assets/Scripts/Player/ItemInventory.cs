@@ -116,6 +116,7 @@ public class ItemInventory : MonoBehaviourPunCallbacks
         if (photonView.IsMine)
         {
             GameObject gun = PhotonNetwork.Instantiate(HANDITEMSPATH + _gunPrefab.name, _itemsPosition.position, Quaternion.identity);
+            IfIsMineEnable.ChangeChildrenLayer(gun, "Hand Item");
             photonView.RPC("SetObjectParent", RpcTarget.All, gun.GetComponent<PhotonView>().ViewID);
             photonView.RPC("SetGunScripts", RpcTarget.All);
         }
@@ -139,6 +140,7 @@ public class ItemInventory : MonoBehaviourPunCallbacks
         if (photonView.IsMine)
         {
             GameObject lamp = PhotonNetwork.Instantiate(HANDITEMSPATH + _lampPrefab.name, _itemsPosition.position, Quaternion.identity);
+            IfIsMineEnable.ChangeChildrenLayer(lamp, "Hand Item");
             photonView.RPC("SetObjectParent", RpcTarget.All, lamp.GetComponent<PhotonView>().ViewID);
         }
     }
@@ -151,7 +153,11 @@ public class ItemInventory : MonoBehaviourPunCallbacks
     {
         haveMainItem = true;
 
-        Instantiate(_compassPrefab, _itemsPosition);
+        GameObject compass = Instantiate(_compassPrefab, _itemsPosition);
+        
+        if(photonView.IsMine)
+            IfIsMineEnable.ChangeChildrenLayer(compass, "Hand Item");
+        
         _compassUI.SetActive(true);
     }
 
@@ -163,7 +169,9 @@ public class ItemInventory : MonoBehaviourPunCallbacks
     {
         haveMainItem = true;
         
-        Instantiate(_mirrorPrefab, _itemsPosition);
+        GameObject mirror = Instantiate(_mirrorPrefab, _itemsPosition);
+        if(photonView.IsMine)
+            IfIsMineEnable.ChangeChildrenLayer(mirror, "Hand Item");
     }
     
     #endregion

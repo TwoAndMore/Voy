@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3272398079426125746}
   - component: {fileID: 2616836951096527857}
   - component: {fileID: 8542116696106797914}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: base_metal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 7258544439247634366}
   - component: {fileID: 3818775046038281009}
   - component: {fileID: 8542863486333701912}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: glass_shell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,7 +172,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1232449262727776758}
   - component: {fileID: 2306247316152225621}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: CompassHand
   m_TagString: Compass
   m_Icon: {fileID: 0}
@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 6539945470717180231}
   - component: {fileID: 7815740145222643051}
   - component: {fileID: 1870038668850853594}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: center_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -307,7 +307,7 @@ GameObject:
   - component: {fileID: 4366122076351000479}
   - component: {fileID: 6447654061342554467}
   - component: {fileID: 5357099579828031077}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: center_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -389,7 +389,7 @@ GameObject:
   - component: {fileID: 2824003815940641406}
   - component: {fileID: 5510113913625270459}
   - component: {fileID: 574121060750114387}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: pin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -488,7 +488,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8930593798886434476}
   - component: {fileID: 1046438465532093337}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -582,7 +582,7 @@ GameObject:
   - component: {fileID: 8376293319605231555}
   - component: {fileID: 4706233461901510276}
   - component: {fileID: 5920096535911622060}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: compass_map
   m_TagString: Untagged
   m_Icon: {fileID: 0}
