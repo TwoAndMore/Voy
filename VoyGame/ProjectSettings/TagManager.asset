@@ -17,6 +17,7 @@ TagManager:
   - QuestItem
   - Cross
   - Coffin
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -26,7 +27,7 @@ TagManager:
   - UI
   - PlayerBody
   - Hand Item
-  - 
+  - Post Processing
   - 
   - 
   - 
