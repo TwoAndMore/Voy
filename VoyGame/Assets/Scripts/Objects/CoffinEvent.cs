@@ -1,4 +1,3 @@
-using System;
 using Photon.Pun;
 using UnityEngine;
 
@@ -6,20 +5,22 @@ public class CoffinEvent : MonoBehaviourPunCallbacks
 {
     [SerializeField] private GameObject[] _objects;
     [SerializeField] private GameObject _bookPrefab;
+    [SerializeField] private GameObject _bibleScreen;
+    [SerializeField] private GameObject _crowsBoid;
+    [SerializeField] private GameObject _butterFliesBoid;
+    [SerializeField] private GameObject _slimstersCircle;
+    [SerializeField] private GameObject _placeEffects;
+    [SerializeField] private GameObject _progressBar;
+    [SerializeField] private Transform _bookPlace;
     [SerializeField] private AudioClip _biblePutSound;
-    
+
     private QuestItemsInventory _questItemsInventory;
     private AudioSource _audioSource;
-    private GameObject _bibleScreen;
-    private GameObject _crowsBoid;
-    private GameObject _butterFliesBoid;
-    private GameObject _slimstersCircle;
-    private GameObject _progressBar;
-    private Transform _bookPlace;
     private bool _secondBibleActivation;
     private bool _isFinished;
     private bool _isLost;
-
+    
+    [Space(15)]
     public GameObject pressFIcon;
     public GameObject playerReading;
     public bool isReading;
@@ -30,13 +31,6 @@ public class CoffinEvent : MonoBehaviourPunCallbacks
     private void Awake()
     {
         _questItemsInventory = GameObject.Find("Info Canvas").GetComponent<QuestItemsInventory>();
-        _bibleScreen = transform.Find("BibleUI/BookImage").gameObject;
-        _progressBar = transform.Find("BibleUI/Bible Slider").gameObject;
-        pressFIcon = transform.Find("F Icon Canvas").gameObject;
-        _bookPlace = transform.Find("BiblePlace");
-        _crowsBoid = transform.Find("Boid Crows").gameObject;
-        _butterFliesBoid = transform.Find("Boid ButterFlies").gameObject;
-        _slimstersCircle = transform.Find("Slimsters Circle").gameObject;
         _audioSource = GetComponent<AudioSource>();
     }
 
@@ -52,6 +46,7 @@ public class CoffinEvent : MonoBehaviourPunCallbacks
         {
             _slimstersCircle.SetActive(true);
             _crowsBoid.SetActive(true);
+            _placeEffects.SetActive(true);
         }
         
         _secondBibleActivation = true;
@@ -65,6 +60,7 @@ public class CoffinEvent : MonoBehaviourPunCallbacks
             _slimstersCircle.SetActive(false);
             _progressBar.SetActive(false);
             _crowsBoid.SetActive(false);
+            _placeEffects.SetActive(false);
             _butterFliesBoid.SetActive(true);
         }
     }
@@ -115,16 +111,14 @@ public class CoffinEvent : MonoBehaviourPunCallbacks
         _slimstersCircle.SetActive(false);
         StopReading();
         
-        Debug.Log("Game Lost");
         GlobalEventManager.SendGameOver();
-        Debug.Log("Sended");
     }
 
     public void ReadObjectsActivation(bool status, GameObject player)
     {
         _audioSource.enabled = status;
         player.GetComponent<PlayerMovement>().enabled = !status;
-        player.transform.Find("CameraHolder").GetComponent<MouseLook>().enabled = !status;
+        player.transform.Find("Main Camera").GetComponent<MouseLook>().enabled = !status;
         _bibleScreen.SetActive(status);
 
         if (!status)
