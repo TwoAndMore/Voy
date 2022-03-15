@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,22 +9,30 @@ using UnityEngine.UI;
 public class Launcher : MonoBehaviourPunCallbacks
 {
     private const string GAMEVERSION = "1";
+    private const string SCENETESTNAME = "Test";
     private const byte MAXPLAYERSPERROOM = 4;
     private const int CONNECTAGAINTIME = 5;
 
     [SerializeField] private GameObject _music;
     [SerializeField] private GameObject _connectPanel;
-    [SerializeField] private GameObject _buttonRoomPrefab;
-    [SerializeField] private GameObject _roomListContent;
+    [SerializeField] private GameObject _lobbyPanel;
+    [SerializeField] private GameObject _roomListPanel;
+    [SerializeField] private Button _startButton;
+    [SerializeField] private TextMeshProUGUI _lobbyTitle;
     [SerializeField] private Animator _cameraAnimator;
     [SerializeField] private TextMeshProUGUI _connectingText;
     [SerializeField] private TMP_InputField _nickNameField;
-    [SerializeField] private List<RoomInfo> _roomList;
+    
+    [Header("FORMS")][Space(15)]
+    [SerializeField] private GameObject _newRoomFormPrefab;
+    [SerializeField] private GameObject _newPlayerFormPrefab;
+    [SerializeField] private Transform _roomFormParent;
+    [SerializeField] private Transform _playerFormParent;
+    [SerializeField] private List<GameObject> _roomList = new List<GameObject>();
+    [SerializeField] private List<GameObject> _playerList = new List<GameObject>();
 
-    private void Start()
-    {
+    private void Start() => 
         Connect();
-    }
 
     public override void OnConnectedToMaster()
     {
@@ -33,7 +40,8 @@ public class Launcher : MonoBehaviourPunCallbacks
         _music.SetActive(true);
         _cameraAnimator.enabled = true;
         _connectingText.text = "CONNECTED";
-        CreateRoom();
+        PhotonNetwork.JoinLobby();
+        //CreateRoom();
     }
 
     public override void OnDisconnected(DisconnectCause cause)
@@ -50,30 +58,36 @@ public class Launcher : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         Debug.Log("Joined");
-        PhotonNetwork.LoadLevel("Test");
+        UpdatePlayerList();
+        
+        _roomListPanel.SetActive(false);
+        _lobbyPanel.SetActive(true);
+        _lobbyTitle.text = PhotonNetwork.CurrentRoom.Name + "'s LOBBY";
+
+        //PhotonNetwork.LoadLevel("Test");
     }
 
+    public override void OnLeftRoom()
+    {
+        Debug.Log("Left");
+        UpdatePlayerList();
+    }
+    
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        Debug.Log(newPlayer.NickName + " Joined");
+        UpdatePlayerList();
+        Debug.Log(newPlayer.NickName + " Entered");
+    }
+
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        UpdatePlayerList();
+        Debug.Log(otherPlayer.NickName + " Left");
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
-        _roomList = roomList;
-        ClearRoomList();
-
-        Transform content = _roomListContent.transform;
-        foreach (RoomInfo room in _roomList)
-        {
-            GameObject roomButton = Instantiate(_buttonRoomPrefab, content);
-
-            roomButton.transform.Find("Name").GetComponent<TextMeshProUGUI>().text = room.Name;
-            roomButton.transform.Find("Players").GetComponent<TextMeshProUGUI>().text = room.PlayerCount + " / " + room.MaxPlayers;
-            roomButton.GetComponent<Button>().onClick.AddListener(delegate
-            { PhotonNetwork.JoinRoom(roomButton.transform.Find("Name").GetComponent<TextMeshProUGUI>().text); });
-        }
-        base.OnRoomListUpdate(roomList);
+        UpdateRoomList(roomList);
     }
 
     private void Connect()
@@ -83,26 +97,69 @@ public class Launcher : MonoBehaviourPunCallbacks
         PhotonNetwork.GameVersion = GAMEVERSION;
     }
 
-    private void ClearRoomList()
+    private void UpdateRoomList(List<RoomInfo> roomList)
     {
-        Transform content = _roomListContent.transform;
-        foreach (Transform tsf in content) 
-            Destroy(tsf.gameObject);
-    }
-    
-    public void JoinRandom()
-    {
-        PhotonNetwork.JoinRandomRoom();
+        for(int i = 0; i < _roomList.Count; i++)
+            Destroy(_roomList[i]);
+        
+        _roomList.Clear();
+        
+        for (int i = 0; i < roomList.Count; i++)
+        {
+            if(roomList[i].PlayerCount == 0)
+                continue;
+
+            GameObject newRoom = Instantiate(_newRoomFormPrefab, _roomFormParent.transform);
+            newRoom.GetComponent<MainMenuForms>().SetRoomValues(roomList[i].Name, roomList[i].PlayerCount + " / " + roomList[i].MaxPlayers);
+            newRoom.GetComponent<Button>().onClick.AddListener(delegate
+            {
+                JoinRoom(newRoom.GetComponent<MainMenuForms>().text1.text);
+            });
+            
+            _roomList.Add(newRoom);
+        }
     }
 
-    public void CreateRoom()
+    private void UpdatePlayerList()
     {
-        if (PhotonNetwork.CountOfRooms != 0)
-            PhotonNetwork.JoinRandomRoom();
-        else
-            PhotonNetwork.CreateRoom(_nickNameField.text,  new RoomOptions(){MaxPlayers = MAXPLAYERSPERROOM, });
-    }
+        for (int i = 0; i <_playerList.Count; i++) 
+            Destroy(_playerList[i]);
     
+        _playerList.Clear();
+
+        if(PhotonNetwork.CurrentRoom == null)
+            return;
+        
+        foreach (KeyValuePair<int, Player> player in PhotonNetwork.CurrentRoom.Players)
+        {
+            GameObject newPlayer = Instantiate(_newPlayerFormPrefab, _playerFormParent);
+            
+            _playerList.Add(newPlayer);
+            
+            newPlayer.GetComponent<MainMenuForms>().SetText(player.Value.NickName);
+            
+            if (Equals(PhotonNetwork.LocalPlayer, player.Value))
+                newPlayer.GetComponent<MainMenuForms>().text1.fontStyle = FontStyles.Underline | FontStyles.Bold;
+            
+            _startButton.interactable = PhotonNetwork.IsMasterClient;
+        }
+    }
+
+    public void CreateRoom() => 
+        PhotonNetwork.CreateRoom(_nickNameField.text,  new RoomOptions{MaxPlayers = MAXPLAYERSPERROOM, IsVisible = true});
+
+    public void JoinRoom(string roomName) => 
+        PhotonNetwork.JoinRoom(roomName);
+
+    public void JoinRandom() => 
+        PhotonNetwork.JoinRandomRoom();
+
+    public void LeaveRoom() => 
+        PhotonNetwork.LeaveRoom();
+
+    public void StartScene() => 
+        PhotonNetwork.LoadLevel(SCENETESTNAME);
+
     private IEnumerator FadingImage(Image image)
     {
         float colorDecrease = 1f;
