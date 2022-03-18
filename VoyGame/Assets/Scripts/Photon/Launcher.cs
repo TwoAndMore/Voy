@@ -15,8 +15,9 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     [SerializeField] private GameObject _music;
     [SerializeField] private GameObject _connectPanel;
-    [SerializeField] private GameObject _lobbyPanel;
+    [SerializeField] private GameObject _buttonPanel;
     [SerializeField] private GameObject _roomListPanel;
+    [SerializeField] private GameObject _lobbyPanel;
     [SerializeField] private Button _startButton;
     [SerializeField] private TextMeshProUGUI _lobbyTitle;
     [SerializeField] private Animator _cameraAnimator;
@@ -53,8 +54,11 @@ public class Launcher : MonoBehaviourPunCallbacks
     public override void OnCreatedRoom()
     {
         Debug.Log("Created");
+        
+        _lobbyPanel.SetActive(true);
+        _buttonPanel.SetActive(false);
     }
-
+    
     public override void OnJoinedRoom()
     {
         Debug.Log("Joined");
@@ -70,6 +74,10 @@ public class Launcher : MonoBehaviourPunCallbacks
     public override void OnLeftRoom()
     {
         Debug.Log("Left");
+        
+        _buttonPanel.SetActive(true);
+        _lobbyPanel.SetActive(false);
+        
         UpdatePlayerList();
     }
     
@@ -133,13 +141,15 @@ public class Launcher : MonoBehaviourPunCallbacks
         foreach (KeyValuePair<int, Player> player in PhotonNetwork.CurrentRoom.Players)
         {
             GameObject newPlayer = Instantiate(_newPlayerFormPrefab, _playerFormParent);
+            MainMenuForms form = newPlayer.GetComponent<MainMenuForms>();
             
             _playerList.Add(newPlayer);
             
-            newPlayer.GetComponent<MainMenuForms>().SetText(player.Value.NickName);
-            
             if (Equals(PhotonNetwork.LocalPlayer, player.Value))
-                newPlayer.GetComponent<MainMenuForms>().text1.fontStyle = FontStyles.Underline | FontStyles.Bold;
+                form.text1.fontStyle = FontStyles.Underline | FontStyles.Bold;
+
+            form.SetText(player.Value.NickName);
+            form.image1.enabled = player.Value.IsMasterClient;
             
             _startButton.interactable = PhotonNetwork.IsMasterClient;
         }
@@ -162,7 +172,6 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     private IEnumerator FadingImage(Image image)
     {
-        float colorDecrease = 1f;
         Color32 currentColor = image.color;
         if (currentColor.a <= 20)
             _connectPanel.SetActive(false);

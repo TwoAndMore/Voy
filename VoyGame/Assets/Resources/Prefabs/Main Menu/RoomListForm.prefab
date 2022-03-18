@@ -403,7 +403,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9ec8d906a2daa042bb1fbb49c405ce0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _button: {fileID: 0}
-  _text2: {fileID: 6808580871830097236}
-  _image: {fileID: 0}
   text1: {fileID: 6808580871678440671}
+  text2: {fileID: 6808580871830097236}
+  image1: {fileID: 0}
