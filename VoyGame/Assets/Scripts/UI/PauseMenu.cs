@@ -1,7 +1,11 @@
+using Photon.Pun;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
+    private const string MENUSCENENAME = "MainMenu";
+    
     [SerializeField] private GameObject _pauseCanvas;
 
     public static bool isPaused;
@@ -18,5 +22,11 @@ public class PauseMenu : MonoBehaviour
         _pauseCanvas.SetActive(isPaused);
         Cursor.lockState = isPaused ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible = isPaused;
+    }
+
+    public void Quit()
+    {
+        PhotonNetwork.LeaveRoom();
+        SceneManager.LoadScene(MENUSCENENAME);
     }
 }

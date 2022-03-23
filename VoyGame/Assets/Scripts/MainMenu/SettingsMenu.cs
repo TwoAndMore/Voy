@@ -1,19 +1,32 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UI;
 
 public class SettingsMenu : MonoBehaviour
 {
     [SerializeField] private AudioMixer _audioMixer;
     [SerializeField] private Dropdown _resolutionDropdown;
+    [SerializeField] private GameObject _statisticCanvas;
+    [SerializeField] private PostProcessVolume _postProcessVolume;
     
     private Resolution[] _resolutions;
+    private Bloom _bloomEffect;
+    private ColorGrading _colorGradingEffect;
 
-    private SettingsPrefs _prefl;
-    
-    private void Start()
+    private void Awake()
+    {
+        FindAllResolutions();
+        
+        _postProcessVolume.profile.TryGetSettings(out _bloomEffect);
+        _postProcessVolume.profile.TryGetSettings(out _colorGradingEffect);
+    }
+
+    private void Start() => 
+        gameObject.SetActive(false);
+
+    private void FindAllResolutions()
     {
         _resolutions = Screen.resolutions;
         _resolutionDropdown.ClearOptions();
@@ -33,7 +46,7 @@ public class SettingsMenu : MonoBehaviour
         _resolutionDropdown.value = currentResolutionIndex;
         _resolutionDropdown.RefreshShownValue();
     }
-
+    
     public void SetResolution(int resolutionIndex)
     {
         Resolution resolution = _resolutions[resolutionIndex];
@@ -98,7 +111,10 @@ public class SettingsMenu : MonoBehaviour
 
     public void SetBrightness(float index)
     {
-        Screen.brightness = index;
+        if(_colorGradingEffect == null)
+            return;
+        
+        _colorGradingEffect.gamma.value.w = index;
         PlayerPrefs.SetFloat(SettingsPrefs.Brightness, index);
     }
     
@@ -116,7 +132,10 @@ public class SettingsMenu : MonoBehaviour
     
     public void SetBloom(bool status)
     {
-        //
+        if(_bloomEffect == null)
+            return;
+        
+        _bloomEffect.active = status;
         PlayerPrefs.SetInt(SettingsPrefs.Bloom, status ? 1 : 0);
     }
 
@@ -144,13 +163,15 @@ public class SettingsMenu : MonoBehaviour
         PlayerPrefs.SetFloat(SettingsPrefs.Music, volume);
     }
 
-    public void SetFOW(float index)
+    public void SetFOV(float index)
     {
+        PlayerStats.FieldOfView = (int)index;
         PlayerPrefs.SetFloat(SettingsPrefs.FieldOfView, index);
     }
     
     public void SetMouseSensitivity(float index)
     {
+        PlayerStats.MouseSensitivity = index;
         PlayerPrefs.SetFloat(SettingsPrefs.MouseSensitivity, index);
     }
     
@@ -161,6 +182,7 @@ public class SettingsMenu : MonoBehaviour
     
     public void SetShowStatistics(bool status)
     {
+        _statisticCanvas.SetActive(status);
         PlayerPrefs.SetInt(SettingsPrefs.ShowStatistics, status ? 1 : 0);
     }
 

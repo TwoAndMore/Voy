@@ -4,12 +4,13 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Launcher : MonoBehaviourPunCallbacks
 {
     private const string GAMEVERSION = "1";
-    private const string SCENETESTNAME = "Test";
+    private const string SCENETESTNAME = "Island";
     private const byte MAXPLAYERSPERROOM = 4;
     private const int CONNECTAGAINTIME = 5;
 
@@ -37,12 +38,20 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
+        Debug.Log("Connected");
+        
+        PhotonNetwork.JoinLobby();
+        //CreateRoom();
+    }
+
+    public override void OnJoinedLobby()
+    {
+        Debug.Log("Joined");
+        
         StartCoroutine(FadingImage(_connectPanel.GetComponent<Image>()));
         _music.SetActive(true);
         _cameraAnimator.enabled = true;
         _connectingText.text = "CONNECTED";
-        PhotonNetwork.JoinLobby();
-        //CreateRoom();
     }
 
     public override void OnDisconnected(DisconnectCause cause)
@@ -51,20 +60,17 @@ public class Launcher : MonoBehaviourPunCallbacks
         StartCoroutine(ConnectAgain());
     }
 
-    public override void OnCreatedRoom()
-    {
+    public override void OnCreatedRoom() => 
         Debug.Log("Created");
-        
-        _lobbyPanel.SetActive(true);
-        _buttonPanel.SetActive(false);
-    }
-    
+
     public override void OnJoinedRoom()
     {
-        Debug.Log("Joined");
+        Debug.Log("Joined room");
+        
         UpdatePlayerList();
         
         _roomListPanel.SetActive(false);
+        _buttonPanel.SetActive(false);
         _lobbyPanel.SetActive(true);
         _lobbyTitle.text = PhotonNetwork.CurrentRoom.Name + "'s LOBBY";
 
@@ -83,20 +89,18 @@ public class Launcher : MonoBehaviourPunCallbacks
     
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        UpdatePlayerList();
         Debug.Log(newPlayer.NickName + " Entered");
+        UpdatePlayerList();
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
-        UpdatePlayerList();
         Debug.Log(otherPlayer.NickName + " Left");
+        UpdatePlayerList();
     }
 
-    public override void OnRoomListUpdate(List<RoomInfo> roomList)
-    {
+    public override void OnRoomListUpdate(List<RoomInfo> roomList) => 
         UpdateRoomList(roomList);
-    }
 
     private void Connect()
     {
@@ -169,7 +173,8 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public void StartScene() => 
         PhotonNetwork.LoadLevel(SCENETESTNAME);
-
+    
+    
     private IEnumerator FadingImage(Image image)
     {
         Color32 currentColor = image.color;
@@ -186,7 +191,10 @@ public class Launcher : MonoBehaviourPunCallbacks
             image.color = currentColor;
             StartCoroutine(FadingImage(image));
         }
+        
     }
+    
+    
 
     private IEnumerator ConnectAgain()
     {
