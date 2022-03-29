@@ -1,10 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Launcher : MonoBehaviourPunCallbacks
@@ -19,6 +19,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject _buttonPanel;
     [SerializeField] private GameObject _roomListPanel;
     [SerializeField] private GameObject _lobbyPanel;
+    [SerializeField] private GameObject _loadingScreen;
     [SerializeField] private Button _startButton;
     [SerializeField] private TextMeshProUGUI _lobbyTitle;
     [SerializeField] private Animator _cameraAnimator;
@@ -115,7 +116,7 @@ public class Launcher : MonoBehaviourPunCallbacks
             Destroy(_roomList[i]);
         
         _roomList.Clear();
-        
+
         for (int i = 0; i < roomList.Count; i++)
         {
             if(roomList[i].PlayerCount == 0)
@@ -127,6 +128,8 @@ public class Launcher : MonoBehaviourPunCallbacks
             {
                 JoinRoom(newRoom.GetComponent<MainMenuForms>().text1.text);
             });
+            
+            newRoom.GetComponent<Button>().interactable = roomList[i].PlayerCount != roomList[i].MaxPlayers;
             
             _roomList.Add(newRoom);
         }
@@ -158,7 +161,7 @@ public class Launcher : MonoBehaviourPunCallbacks
             _startButton.interactable = PhotonNetwork.IsMasterClient;
         }
     }
-
+    
     public void CreateRoom() => 
         PhotonNetwork.CreateRoom(_nickNameField.text,  new RoomOptions{MaxPlayers = MAXPLAYERSPERROOM, IsVisible = true});
 
@@ -169,12 +172,19 @@ public class Launcher : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinRandomRoom();
 
     public void LeaveRoom() => 
-        PhotonNetwork.LeaveRoom();
+    PhotonNetwork.LeaveRoom();
 
-    public void StartScene() => 
+    public void StartScene()
+    {
+        PhotonNetwork.CurrentRoom.IsOpen = false;
+        PhotonNetwork.CurrentRoom.IsVisible = false;
+        
+        _startButton.interactable = false;
+        _loadingScreen.SetActive(true);
+        
         PhotonNetwork.LoadLevel(SCENETESTNAME);
-    
-    
+    }
+
     private IEnumerator FadingImage(Image image)
     {
         Color32 currentColor = image.color;
@@ -194,8 +204,6 @@ public class Launcher : MonoBehaviourPunCallbacks
         
     }
     
-    
-
     private IEnumerator ConnectAgain()
     {
         yield return new WaitForSeconds(3f);

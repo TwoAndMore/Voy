@@ -52,11 +52,10 @@ public class SettingsPrefs : MonoBehaviour
     
     //[Header("Keyboard")]
     
-
     private void Start() => 
         LoadSettings();
 
-    private void LoadSettings()
+    public void LoadSettings()
     {
         SetDropdown(_textureQuality, TextureQuality);
         SetDropdown(_antiAliasing, AntiAliasing);
