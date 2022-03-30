@@ -3289,7 +3289,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5458806869394704656, guid: 61363c02cfa7191469a7c4b3d3b1db07, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 28.540009
+      value: 28.54004
       objectReference: {fileID: 0}
     - target: {fileID: 5458806869394704656, guid: 61363c02cfa7191469a7c4b3d3b1db07, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3852,6 +3852,34 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0.14893617
       objectReference: {fileID: 0}
+    - target: {fileID: 8305163340358010431, guid: 4c910936e22d7314e835ebc863fdb364, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8305163340358010431, guid: 4c910936e22d7314e835ebc863fdb364, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8305163340358010431, guid: 4c910936e22d7314e835ebc863fdb364, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 7408844654875700576}
+    - target: {fileID: 8305163340358010431, guid: 4c910936e22d7314e835ebc863fdb364, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8305163340358010431, guid: 4c910936e22d7314e835ebc863fdb364, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: ChangeSensitivity
+      objectReference: {fileID: 0}
+    - target: {fileID: 8305163340358010431, guid: 4c910936e22d7314e835ebc863fdb364, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: MouseLook, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8305163340358010431, guid: 4c910936e22d7314e835ebc863fdb364, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8305163340416675296, guid: 4c910936e22d7314e835ebc863fdb364, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -4139,6 +4167,34 @@ PrefabInstance:
     - target: {fileID: 8305163341377161537, guid: 4c910936e22d7314e835ebc863fdb364, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -130.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8305163341464938282, guid: 4c910936e22d7314e835ebc863fdb364, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8305163341464938282, guid: 4c910936e22d7314e835ebc863fdb364, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8305163341464938282, guid: 4c910936e22d7314e835ebc863fdb364, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 7408844654875700576}
+    - target: {fileID: 8305163341464938282, guid: 4c910936e22d7314e835ebc863fdb364, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8305163341464938282, guid: 4c910936e22d7314e835ebc863fdb364, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: ChangeFOV
+      objectReference: {fileID: 0}
+    - target: {fileID: 8305163341464938282, guid: 4c910936e22d7314e835ebc863fdb364, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: MouseLook, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8305163341464938282, guid: 4c910936e22d7314e835ebc863fdb364, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8305163341508789897, guid: 4c910936e22d7314e835ebc863fdb364, type: 3}
       propertyPath: m_AnchorMax.y

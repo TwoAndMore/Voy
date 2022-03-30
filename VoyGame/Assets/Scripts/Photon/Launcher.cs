@@ -1,16 +1,18 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
+using ExitGames.Client.Photon.StructWrapping;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
 using UnityEngine.UI;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class Launcher : MonoBehaviourPunCallbacks
 {
     private const string GAMEVERSION = "1";
     private const string SCENETESTNAME = "Island";
+    private const string STARTPROP = "GAMESTART";
     private const byte MAXPLAYERSPERROOM = 4;
     private const int CONNECTAGAINTIME = 5;
 
@@ -19,13 +21,12 @@ public class Launcher : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject _buttonPanel;
     [SerializeField] private GameObject _roomListPanel;
     [SerializeField] private GameObject _lobbyPanel;
-    [SerializeField] private GameObject _loadingScreen;
-    [SerializeField] private Button _startButton;
-    [SerializeField] private TextMeshProUGUI _lobbyTitle;
     [SerializeField] private Animator _cameraAnimator;
+    [SerializeField] private TextMeshProUGUI _lobbyTitle;
     [SerializeField] private TextMeshProUGUI _connectingText;
     [SerializeField] private TMP_InputField _nickNameField;
-    
+    [SerializeField] private Button _startButton;
+
     [Header("FORMS")][Space(15)]
     [SerializeField] private GameObject _newRoomFormPrefab;
     [SerializeField] private GameObject _newPlayerFormPrefab;
@@ -36,11 +37,10 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     private void Start() => 
         Connect();
-
+    
     public override void OnConnectedToMaster()
     {
         Debug.Log("Connected");
-        
         PhotonNetwork.JoinLobby();
         //CreateRoom();
     }
@@ -48,7 +48,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     public override void OnJoinedLobby()
     {
         Debug.Log("Joined");
-        
+
         StartCoroutine(FadingImage(_connectPanel.GetComponent<Image>()));
         _music.SetActive(true);
         _cameraAnimator.enabled = true;
@@ -57,6 +57,8 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnDisconnected(DisconnectCause cause)
     {
+        Debug.Log("Disconnect");
+        _connectPanel.SetActive(true);
         _connectingText.text = "ERROR\n  You may not have an internet connection. Try again.";
         StartCoroutine(ConnectAgain());
     }
@@ -84,8 +86,6 @@ public class Launcher : MonoBehaviourPunCallbacks
         
         _buttonPanel.SetActive(true);
         _lobbyPanel.SetActive(false);
-        
-        UpdatePlayerList();
     }
     
     public override void OnPlayerEnteredRoom(Player newPlayer)
@@ -102,6 +102,12 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList) => 
         UpdateRoomList(roomList);
+
+    public override void OnRoomPropertiesUpdate(Hashtable propertiesThatChanged)
+    {
+        if (propertiesThatChanged.TryGetValue(STARTPROP, out bool key)) 
+            LevelLoading.Instance.LoadLevel(SCENETESTNAME);
+    }
 
     private void Connect()
     {
@@ -162,8 +168,20 @@ public class Launcher : MonoBehaviourPunCallbacks
         }
     }
     
-    public void CreateRoom() => 
-        PhotonNetwork.CreateRoom(_nickNameField.text,  new RoomOptions{MaxPlayers = MAXPLAYERSPERROOM, IsVisible = true});
+    public void CreateRoom()
+    {
+        RoomOptions roomOptions = new RoomOptions()
+        {
+            IsVisible = true,
+            IsOpen = true,
+            MaxPlayers = MAXPLAYERSPERROOM,
+        };
+        
+        Hashtable roomCustomProps = new Hashtable();
+        roomCustomProps.Add(STARTPROP, false);
+        roomOptions.CustomRoomProperties = roomCustomProps;
+        PhotonNetwork.CreateRoom(_nickNameField.text, roomOptions);
+    }
 
     public void JoinRoom(string roomName) => 
         PhotonNetwork.JoinRoom(roomName);
@@ -172,17 +190,16 @@ public class Launcher : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinRandomRoom();
 
     public void LeaveRoom() => 
-    PhotonNetwork.LeaveRoom();
-
+        PhotonNetwork.LeaveRoom();
+    
     public void StartScene()
     {
         PhotonNetwork.CurrentRoom.IsOpen = false;
         PhotonNetwork.CurrentRoom.IsVisible = false;
         
         _startButton.interactable = false;
-        _loadingScreen.SetActive(true);
-        
-        PhotonNetwork.LoadLevel(SCENETESTNAME);
+
+        PhotonNetwork.CurrentRoom.SetCustomProperties(new Hashtable() { { STARTPROP, true } });
     }
 
     private IEnumerator FadingImage(Image image)
@@ -201,7 +218,6 @@ public class Launcher : MonoBehaviourPunCallbacks
             image.color = currentColor;
             StartCoroutine(FadingImage(image));
         }
-        
     }
     
     private IEnumerator ConnectAgain()

@@ -27,6 +27,6 @@ public class PauseMenu : MonoBehaviour
     public void Quit()
     {
         PhotonNetwork.LeaveRoom();
-        SceneManager.LoadScene(MENUSCENENAME);
+        LevelLoading.Instance.LoadLevel(MENUSCENENAME);
     }
 }
